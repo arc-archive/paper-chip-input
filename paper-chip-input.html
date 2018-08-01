@@ -26,11 +26,16 @@ the License.
       display: block;
       position: relative;
       @apply --paper-chip-input;
+
+      --paper-input-container-shared-input-style: {
+        min-width: 120px;
+      };
     }
 
     .chips {
       @apply --layout-horizontal;
       @apply --layout-center;
+      @apply --layout-wrap;
     }
     </style>
     <paper-input class="input-input"
