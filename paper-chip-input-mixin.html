@@ -54,7 +54,7 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
          * property, or the value property of your input that is `notify:true`.
          * @type {*}
          */
-        value: {notify: true, type: Array, computed: '_computeValue(chips.*)'},
+        value: {notify: true, type: Array},
         /**
          * Set to true to disable this input. If you're using PaperInputBehavior to
          * implement your own paper-input-like element, bind this to
@@ -228,6 +228,13 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
       };
     }
 
+    static get observers() {
+      return [
+        '_computeValue(chips.*)',
+        '_computeChipsValues(value, source)'
+      ];
+    }
+
     connectedCallback() {
       super.connectedCallback();
       this._inputElement = this.shadowRoot.querySelector('.input-input');
@@ -306,7 +313,59 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
       if ((record.path !== 'chips.length' && record.path !== 'chips') || !record.base) {
         return;
       }
-      return record.base.map((item) => item.label);
+      if (this._cancelValueComputation) {
+        return;
+      }
+      const result = record.base.map((item) => item.label);
+      this._cancelValueComputation = true;
+      this.set('value', result);
+      this._cancelValueComputation = false;
+    }
+    /**
+     * Restores chips from passed value.
+     * When input's (this element) value change it computes list of chips
+     * @param {[type]} value [description]
+     * @param {[type]} source [description]
+     * @return {[type]} [description]
+     */
+    _computeChipsValues(value, source) {
+      if (!value || !value.length || this._cancelValueComputation) {
+        return;
+      }
+      source = source || [];
+      const newChips = [];
+      for (let i = 0, len = value.length; i < len; i++) {
+        const _value = value[i];
+        if (!_value || !_value.toLowerCase) {
+          continue;
+        }
+        const _lowerValue = _value.toLowerCase();
+        let _source;
+        for (let j = 0, jLen = source.length; j < jLen; j++) {
+          if (typeof source[j] === 'string') {
+            if (source[j].toLowerCase() === _lowerValue) {
+              break;
+            }
+            // No useful information anyway
+            continue;
+          }
+          if (source[j].value && source[j].value.toLowerCase() === _lowerValue) {
+            _source = source[j];
+            break;
+          }
+        }
+        const chip = {
+          removable: true,
+        };
+        if (_source) {
+          chip.label = _source.value;
+          chip.icon = _source.icon;
+        } else {
+          chip.label = _value;
+        }
+        newChips[newChips.length] = chip;
+      }
+      this.chips = newChips;
     }
     /**
      * Tests if given value is allowed to enter when `allowed` property is set.
