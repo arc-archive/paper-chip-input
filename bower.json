@@ -1,7 +1,7 @@
 {
   "name": "paper-chip-input",
   "description": "A material design input with chips",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "license": "Apache-2.0",
   "main": "paper-chip-input.html",
   "keywords": [
