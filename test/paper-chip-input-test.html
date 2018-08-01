@@ -309,6 +309,26 @@
       assert.isTrue(element.chips[0].removable, 'Is removable');
       assert.equal(element.chips[0].icon, 'i2', 'Has icon');
     });
+
+    test('Removes chips when value is empty array', (done) => {
+      element = fixture('Basic');
+      element.value = ['test1', 'test2'];
+      flush(() => {
+        element.value = [];
+        assert.lengthOf(element.chips, 0);
+        done();
+      });
+    });
+
+    test('Removes chips when value is undefined', (done) => {
+      element = fixture('Basic');
+      element.value = ['test1', 'test2'];
+      flush(() => {
+        element.value = undefined;
+        assert.lengthOf(element.chips, 0);
+        done();
+      });
+    });
   });
   </script>
 </body>
