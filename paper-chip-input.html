@@ -56,7 +56,7 @@ the License.
       autocapitalize="[[autocapitalize]]"
       autocorrect="[[autocorrect]]"
       autosave="[[autosave]]"
-      on-blur="_blurAll">
+      on-blur="_inputBlur">
       <div class="chips" slot="prefix">
         <template is="dom-repeat" items="[[chips]]">
           <paper-chip removable="[[_computeChipRemovable(item)]]" on-chip-removed="_chipRemovedHandler" on-focus="_chipFocused" tabindex="-1" remove-icon="[[chipRemoveIcon]]">
@@ -220,7 +220,10 @@ the License.
       this._inputElement.blur();
     }
 
-    _blurAll() {
+    _inputBlur() {
+      if (this._value) {
+        this._enterHandler();
+      }
       const chips = this.shadowRoot.querySelectorAll('paper-chips');
       for (let i = 0, len = chips.length; i < len; i++) {
         if (chips[i].focused) {
