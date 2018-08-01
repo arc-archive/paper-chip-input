@@ -162,6 +162,17 @@
       });
     });
 
+    test('Enters chip label into the input field', (done) => {
+      element = fixture('AllRemove');
+      flush(() => {
+        element._backspaceHandler();
+        setTimeout(() => {
+          assert.equal(element._value, 'c-3');
+          done();
+        }, 10);
+      });
+    });
+
     test('Handles remove event', (done) => {
       element = fixture('Chips');
       flush(() => {

@@ -165,7 +165,7 @@ the License.
     /**
      * Removes latest chip if there's no value in the text field.
      */
-    _backspaceHandler() {
+    _backspaceHandler(e) {
       const chips = this.chips;
       if (this._value || !chips || !chips.length) {
         return;
@@ -180,7 +180,11 @@ the License.
       if (removeIndex === -1) {
         return;
       }
+      const chip = chips[removeIndex];
       this._removeChip(removeIndex);
+      setTimeout(() => {
+        this._value = chip.label;
+      });
     }
     /**
      * Handler for `chip-removed` event.
