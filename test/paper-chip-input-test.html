@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <title>paper-chip-input test</title>
+  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../../iron-icons/iron-icons.html">
+  <link rel="import" href="../paper-chip-input.html">
+</head>
+<body>
+  <test-fixture id="Basic">
+    <template>
+      <paper-chip-input></paper-chip-input>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="Chips">
+    <template>
+      <paper-chip-input chips='[{"label": "c-1"}, {"label": "c-2", "removable": true}, {"label": "c-3"}]'></paper-chip-input>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="NoRemove">
+    <template>
+      <paper-chip-input chips='[{"label": "c-1"}, {"label": "c-2"}, {"label": "c-3"}]'></paper-chip-input>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="AllRemove">
+    <template>
+      <paper-chip-input chips='[{"label": "c-1", "removable": true}, {"label": "c-2", "removable": true}, {"label": "c-3", "removable": true}]'></paper-chip-input>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="Allowed">
+    <template>
+      <paper-chip-input allowed='["c1", "c2", "c-3"]'></paper-chip-input>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="Suggestions">
+    <template>
+      <paper-chip-input source='["c1", "c2", "c-3"]'></paper-chip-input>
+    </template>
+  </test-fixture>
+
+  <script>
+  suite('Basics', () => {
+    let element;
+
+    test('_positionTarget is set', (done) => {
+      element = fixture('Basic');
+      flush(() => {
+        assert.ok(element._positionTarget);
+        assert.equal(element._positionTarget.nodeName, 'IRON-INPUT');
+        done();
+      });
+    });
+  });
+
+  suite('Adding a chip', () => {
+    let element;
+
+    test('Value is initially undefined', () => {
+      element = fixture('Basic');
+      assert.isUndefined(element.value);
+    });
+
+    test('Accepts chip from value', (done) => {
+      element = fixture('Basic');
+      element._value = 'test';
+      flush(() => {
+        element._enterHandler();
+        assert.typeOf(element.value, 'array');
+        assert.lengthOf(element.value, 1);
+        assert.equal(element.value[0], 'test');
+        done();
+      });
+    });
+
+    test('Clears input value after accepting input', (done) => {
+      element = fixture('Basic');
+      element._value = 'test';
+      flush(() => {
+        element._enterHandler();
+        assert.equal(element._value, '');
+        done();
+      });
+    });
+
+    test('Ignores existing value', (done) => {
+      element = fixture('Chips');
+      flush(() => {
+        element._value = 'c-1';
+        element._enterHandler();
+        assert.typeOf(element.value, 'array');
+        assert.lengthOf(element.value, 3);
+        done();
+      });
+    });
+
+    test('Clears input value after ignoring it', (done) => {
+      element = fixture('Chips');
+      flush(() => {
+        element._value = 'c-1';
+        element._enterHandler();
+        assert.equal(element._value, '');
+        done();
+      });
+    });
+  });
+
+  suite('Removing a chip', () => {
+    let element;
+    test('Does nothing when no input and no chips', (done) => {
+      element = fixture('Basic');
+      flush(() => {
+        element._backspaceHandler();
+        // no errors recorded
+        done();
+      });
+    });
+
+    test('Do not remove chips when input has text', (done) => {
+      element = fixture('AllRemove');
+      element._value = 'test';
+      flush(() => {
+        element._backspaceHandler();
+        assert.typeOf(element.value, 'array');
+        assert.lengthOf(element.value, 3);
+        done();
+      });
+    });
+
+    test('Removes the chip when input is empty', (done) => {
+      element = fixture('AllRemove');
+      flush(() => {
+        element._backspaceHandler();
+        assert.typeOf(element.value, 'array');
+        assert.lengthOf(element.value, 2);
+        assert.deepEqual(element.value, ['c-1', 'c-2']);
+        done();
+      });
+    });
+
+    test('Removes only removable chips', (done) => {
+      element = fixture('Chips');
+      flush(() => {
+        element._backspaceHandler();
+        assert.typeOf(element.value, 'array');
+        assert.lengthOf(element.value, 2);
+        assert.deepEqual(element.value, ['c-1', 'c-3']);
+        done();
+      });
+    });
+
+    test('Handles remove event', (done) => {
+      element = fixture('Chips');
+      flush(() => {
+        const node = element.shadowRoot.querySelectorAll('paper-chip')[1];
+        node.dispatchEvent(new CustomEvent('chip-removed', {
+          composed: true
+        }));
+        assert.typeOf(element.value, 'array');
+        assert.lengthOf(element.value, 2);
+        assert.deepEqual(element.value, ['c-1', 'c-3']);
+        done();
+      });
+    });
+  });
+
+  suite('Allowed chips', () => {
+    let element;
+    setup((done) => {
+      element = fixture('Allowed');
+      flush(() => done());
+    });
+
+    test('Accepts allowed value', () => {
+      element._value = 'c1';
+      element._enterHandler();
+      assert.equal(element.value[0], 'c1');
+    });
+
+    test('Ignores unknown value', () => {
+      element._value = 'unknown';
+      element._enterHandler();
+      assert.isUndefined(element.value);
+    });
+  });
+
+  suite('Auto suggestions', () => {
+    let element;
+    setup((done) => {
+      element = fixture('Suggestions');
+      flush(() => done());
+    });
+
+    test('Opens suggestions dropdown', () => {
+      element._value = 'c';
+      const node = element.shadowRoot.querySelector('paper-chip-autocomplete');
+      assert.isTrue(node.opened);
+    });
+
+    test('Does no open suggestions when filtered empty', () => {
+      element._value = 'cz';
+      const node = element.shadowRoot.querySelector('paper-chip-autocomplete');
+      assert.isFalse(node.opened);
+    });
+
+    test('Ignores enter when suggestions are opened', () => {
+      element._value = 'c';
+      element._enterHandler();
+      assert.equal(element._value, 'c');
+      assert.isUndefined(element.value);
+    });
+
+    test('Accepts suggestion', (done) => {
+      element._value = 'c';
+      flush(() => {
+        const node = element.shadowRoot.querySelector('paper-chip-autocomplete');
+        node.dispatchEvent(new CustomEvent('selected', {
+          composed: true,
+          detail: {
+            value: {
+              value: 'c1'
+            }
+          }
+        }));
+        assert.equal(element._value, '');
+        assert.equal(element.value[0], 'c1');
+        done();
+      });
+    });
+
+    test('Accepts suggestion and an icon', (done) => {
+      element._value = 'c';
+      flush(() => {
+        const node = element.shadowRoot.querySelector('paper-chip-autocomplete');
+        node.dispatchEvent(new CustomEvent('selected', {
+          composed: true,
+          detail: {
+            value: {
+              value: 'c1',
+              icon: 'test'
+            }
+          }
+        }));
+        flush(() => {
+          const node = element.shadowRoot.querySelector('paper-chip iron-icon');
+          assert.equal(node.icon, 'test');
+          done();
+        });
+      });
+    });
+  });
+  </script>
+</body>
+</html>

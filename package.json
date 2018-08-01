@@ -1,0 +1,29 @@
+{
+  "name": "@advanced-rest-client/paper-chip-input",
+  "description": "A material design input with chips",
+  "version": "2.0.0",
+  "license": "Apache-2.0",
+  "main": "paper-chip-input.html",
+  "authors": [
+    "Pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
+  ],
+  "devDependencies": {
+    "@polymer/gen-typescript-declarations": "^1.1.1"
+  },
+  "private": false,
+  "scripts": {
+    "lint": "polymer lint paper-chip-input.html",
+    "test-sauce": "polymer test --plugin sauce --job-name \"paper-chip-input:local-test\"",
+    "test": "polymer test --plugin local",
+    "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/advanced-rest-client/paper-chip-input.git"
+  },
+  "bugs": {
+    "url": "https://github.com/advanced-rest-client/paper-chip-input/issues",
+    "email": "arc@mulesoft.com"
+  }
+}

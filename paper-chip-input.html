@@ -1,0 +1,217 @@
+<!--
+Copyright 2018 Pawel Psztyc, The ARC team
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+-->
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-chip/paper-chip.html">
+<link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="paper-chip-input-mixin.html">
+<link rel="import" href="paper-chip-autocomplete.html">
+
+<dom-module id="paper-chip-input">
+  <template>
+    <style>
+    :host {
+      display: block;
+      position: relative;
+      @apply --paper-chip-input;
+    }
+    </style>
+    <paper-input class="input-input"
+      always-float-label="[[alwaysFloatLabel]]"
+      no-label-float="[[!alwaysFloatLabel]]"
+			auto-validate="[[autoValidate]]"
+			disabled="[[disabled]]"
+			readonly="[[readonly]]"
+			value="{{_value}}"
+			label="[[label]]"
+			allowed-pattern="[[allowedPattern]]"
+			pattern="[[pattern]]"
+      char-counter="[[charCounter]]"
+      invalid="{{invalid}}"
+			error-message="[[errorMessage]]"
+      validator="[[validator]]"
+      autofocus="[[autofocus]]"
+      inputmode="[[inputmode]]"
+      minlength="[[minlength]]"
+      maxlength="[[maxlength]]"
+      name="[[name]]"
+      placeholder="[[placeholder]]"
+      autocapitalize="[[autocapitalize]]"
+      autocorrect="[[autocorrect]]"
+      autosave="[[autosave]]"
+      on-blur="_blurAll">
+      <div class="chips" slot="prefix">
+        <template is="dom-repeat" items="[[chips]]">
+          <paper-chip removable="[[_computeChipRemovable(item)]]" on-chip-removed="_chipRemovedHandler" on-focus="_chipFocused" tabindex="-1">
+            <template is="dom-if" if="[[item.icon]]" restamp="true">
+              <iron-icon icon="[[item.icon]]" slot="icon"></iron-icon>
+            </template>
+            [[item.label]]
+          </paper-chip>
+        </template>
+			</div>
+    </paper-input>
+    <paper-chip-autocomplete source="[[source]]" value="[[_value]]" position-target="[[_positionTarget]]" input-target="[[_inputElement]]" dynamic-align vertical-align="top" vertical-offset="36" horizontal-align="left" on-selected="_suggestionSelected" opened="{{_suggestionsOpened}}"></paper-chip-autocomplete>
+    <iron-a11y-keys target="[[_inputElement]]" keys="enter" on-keys-pressed="_enterHandler"></iron-a11y-keys>
+		<iron-a11y-keys target="[[_inputElement]]" keys="backspace" on-keys-pressed="_backspaceHandler"></iron-a11y-keys>
+  </template>
+  <script>
+  /**
+   * `paper-chip-input`
+   *
+   * A material design input with material design chips.
+   *
+   * It renders chips on the left hand side of the input. It is added as an
+   * add-on of the `paper-input` element.
+   *
+   * It allows to provide list of suggestions that are rendered is user input
+   * allows to render suggestions.
+   *
+   * ## Example
+   *
+   * ```html
+   * <paper-chip-input
+   *  label="List your favourite fruits"
+   *  required
+   *  auto-validate
+   *  name="fruits"
+   *  allowed='["apple","Orange","BANANA"]'
+   *  source='["Apple", "Apricot", 'Banana',"Orange"]'
+   *  pattern="[a-zA-Z]+"
+   *  error-message="This is not a fruit name!"></paper-chip-input>
+   * ```
+   *
+   * ## Styling
+   *
+   * `<paper-chip-input>` provides the following custom properties and mixins for styling:
+   *
+   * Custom property | Description | Default
+   * ----------------|-------------|----------
+   * `--paper-chip-input` | Mixin applied to this elment | `{}`
+   *
+   * Use `paper-input` and `paper-chip` styles to style the element.
+   *
+   * @customElement
+   * @polymer
+   * @demo demo/index.html
+   * @memberof ApiElements
+   * @appliesMixin ArcBehaviors.PaperChipInputMixin
+   */
+  class PaperChipInput extends ArcBehaviors.PaperChipInputMixin(Polymer.Element) {
+    static get is() { return 'paper-chip-input'; }
+
+    static get properties() {
+      return {
+        /**
+         * True if the suggestions box is currently opened.
+         * Prevents `enter` from accepting the value.
+         */
+        _suggestionsOpened: Boolean,
+        /**
+         * `iron-input` from the paper input to position auto suggestions
+         * properly to the input real position.
+         */
+        _positionTarget: Object
+      };
+    }
+
+    connectedCallback() {
+      super.connectedCallback();
+      this._positionTarget = this._inputElement.inputElement;
+    }
+    /**
+     * Listens for Enter key click and accepts the chip value if it can
+     * be accepted.
+     */
+    _enterHandler() {
+      if (this._suggestionsOpened || !this.validate()) {
+        return;
+      }
+      const value = this._value;
+      if (!value) {
+        return;
+      }
+      if (!this._isAllowed(value)) {
+        return;
+      }
+      this.addChip(value, true);
+      this._value = '';
+    }
+    /**
+     * Removes latest chip if there's no value in the text field.
+     */
+    _backspaceHandler() {
+      const chips = this.chips;
+      if (this._value || !chips || !chips.length) {
+        return;
+      }
+      let removeIndex = -1;
+      for (let i = chips.length - 1; i >= 0; i--) {
+        if (chips[i].removable) {
+          removeIndex = i;
+          break;
+        }
+      }
+      if (removeIndex === -1) {
+        return;
+      }
+      this._removeChip(removeIndex);
+    }
+    /**
+     * Handler for `chip-removed` event.
+     * @param {CustomEvent} e
+     */
+    _chipRemovedHandler(e) {
+      const index = e.model.get('index');
+      this._removeChip(index);
+    }
+    /**
+     * Inserts chip from suggestion.
+     * @param {CustomEvent} e
+     */
+    _suggestionSelected(e) {
+      const item = e.detail.value;
+      if (!this._isAllowed(item.value)) {
+        return;
+      }
+      this.addChip(item.value, true, item.icon);
+      this._value = '';
+    }
+    /**
+     * Chips are focusable elements and they work really
+     * bed with paper-input as an addon.
+     * This cancels the event so paper-input won't become focused.
+     *
+     * @param {ClickEvent} e
+     */
+    _chipFocused(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      this._inputElement.blur();
+    }
+
+    _blurAll() {
+      const chips = this.shadowRoot.querySelectorAll('paper-chips');
+      for (let i = 0, len = chips.length; i < len; i++) {
+        if (chips[i].focused) {
+          chips[i]._focusBlurHandler({});
+        }
+      }
+    }
+  }
+  window.customElements.define(PaperChipInput.is, PaperChipInput);
+  </script>
+</dom-module>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>api-request-editor demo</title>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="../../shadycss/apply-shim.html">
+    <link rel="import" href="../../polymer/lib/elements/custom-style.html">
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-icons/iron-icons.html">
+    <link rel="import" href="../../iron-icons/maps-icons.html">
+    <link rel="import" href="../../paper-styles/typography.html">
+    <link rel="import" href="../paper-chip-input.html">
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      :root {
+        --arc-font-body2: {
+          @apply --paper-font-body2;
+        };
+      }
+      h1 {
+        @apply --paper-font-headline;
+      }
+      h2 {
+        @apply --paper-font-title;
+      }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <dom-bind id="demo">
+      <template is="dom-bind">
+        <div class="vertical-section-container centered" role="main">
+          <h2>paper-chip-input component</h2>
+          <p>See material design documentation for <a href="https://material.io/design/components/chips.html#usage" target="_blank">chips</a>.</p>
+          <h2>Basics</h2>
+          <paper-chip-input label="Chips input demo" value="{{basicOut}}"></paper-chip-input>
+          <template is="dom-if" if="[[basicOut]]">
+            <label>Value:</label>
+            <output>[[basicOut]]</output>
+          </template>
+
+          <h2>Predefined</h2>
+          <paper-chip-input label="Chips input demo" value="{{predefOut}}" chips='[{"label": "Chip #1"}, {"label": "Chip #2"}, {"label": "Removable chip", "removable": true}]'></paper-chip-input>
+          <template is="dom-if" if="[[predefOut]]">
+            <label>Value:</label>
+            <output>[[predefOut]]</output>
+          </template>
+
+          <h2>Validation</h2>
+          <paper-chip-input label="Chips input demo" pattern="[a-zA-Z]+" required auto-validate error-message="Only [a-zA-Z]+ allowed" value="{{validateOut}}"></paper-chip-input>
+          <template is="dom-if" if="[[validateOut]]">
+            <label>Value:</label>
+            <output>[[validateOut]]</output>
+          </template>
+
+          <h2>Allowed chips only</h2>
+          <p>Allowed are: <i>Apple</i>, <i>Orange</i>, and <i>Banana</i>.</p>
+          <paper-chip-input label="Only allowed will become chips and value" allowed='["apple","Orange","BANANA"]' value="{{allowedOut}}"></paper-chip-input>
+          <template is="dom-if" if="[[allowedOut]]">
+            <label>Value:</label>
+            <output>[[allowedOut]]</output>
+          </template>
+
+          <h2>Simple auto suggestions</h2>
+          <p>Try a name of a fruit</p>
+          <paper-chip-input label="Type your favourite frouts" value="{{auto1Out}}" source="[[simpleSuggestions]]"></paper-chip-input>
+          <template is="dom-if" if="[[auto1Out]]">
+            <label>Value:</label>
+            <output>[[auto1Out]]</output>
+          </template>
+
+          <h2>Suggestions with icons</h2>
+          <p>Start with "<b>b</b>"</p>
+          <paper-chip-input label="Type your favourite frouts" value="{{auto2Out}}" source="[[iconSuggestions]]"></paper-chip-input>
+          <template is="dom-if" if="[[auto2Out]]">
+            <label>Value:</label>
+            <output>[[auto2Out]]</output>
+          </template>
+        </div>
+      </template>
+    </dom-bind>
+    <script>
+    (function(app) {
+      app.simpleSuggestions = ['Apple', 'Apricot', 'Avocado',
+        'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry',
+        'Boysenberry', 'Cantaloupe', 'Currant', 'Cherry', 'Cherimoya',
+        'Cloudberry', 'Coconut', 'Cranberry', 'Damson', 'Date', 'Dragonfruit',
+        'Durian', 'Elderberry', 'Feijoa', 'Fig', 'Goji berry', 'Gooseberry',
+        'Grape', 'Grapefruit', 'Guava', 'Huckleberry', 'Jabuticaba', 'Jackfruit',
+        'Jambul', 'Jujube', 'Juniper berry', 'Kiwi fruit', 'Kumquat', 'Lemon',
+        'Lime', 'Loquat', 'Lychee', 'Mango', 'Marion berry', 'Melon', 'Miracle fruit',
+        'Mulberry', 'Nectarine', 'Olive', 'Orange'
+      ];
+
+      app.iconSuggestions = [{
+        value: 'Biking',
+        icon: 'maps:directions-bike'
+      }, {
+        value: 'Boat trip',
+        icon: 'maps:directions-boat'
+      }, {
+        value: 'Bus trip',
+        icon: 'maps:directions-bus'
+      }, {
+        value: 'Car trip',
+        icon: 'maps:directions-car'
+      }, {
+        value: 'Train trip',
+        icon: 'maps:directions-railway'
+      }, {
+        value: 'Running',
+        icon: 'maps:directions-run'
+      }, {
+        value: 'Hiking',
+        icon: 'maps:directions-walk'
+      }, {
+        value: 'Reading',
+        icon: 'maps:local-library'
+      }, {
+        value: 'Shopping',
+        icon: 'maps:local-grocery-store'
+      }, {
+        value: 'Movies!',
+        icon: 'maps:local-movies'
+      }];
+
+      // app._load = function() {
+      //
+      // };
+      // window.addEventListener('WebComponentsReady', () => app._load());
+    })(document.getElementById('demo'));
+  </script>
+  </body>
+</html>
