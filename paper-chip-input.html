@@ -27,6 +27,11 @@ the License.
       position: relative;
       @apply --paper-chip-input;
     }
+
+    .chips {
+      @apply --layout-horizontal;
+      @apply --layout-center;
+    }
     </style>
     <paper-input class="input-input"
       always-float-label="[[alwaysFloatLabel]]"
@@ -51,7 +56,7 @@ the License.
       autocapitalize="[[autocapitalize]]"
       autocorrect="[[autocorrect]]"
       autosave="[[autosave]]"
-      on-blur="_blurAll">
+      on-blur="_inputBlur">
       <div class="chips" slot="prefix">
         <template is="dom-repeat" items="[[chips]]">
           <paper-chip removable="[[_computeChipRemovable(item)]]" on-chip-removed="_chipRemovedHandler" on-focus="_chipFocused" tabindex="-1" remove-icon="[[chipRemoveIcon]]">
@@ -160,7 +165,7 @@ the License.
     /**
      * Removes latest chip if there's no value in the text field.
      */
-    _backspaceHandler() {
+    _backspaceHandler(e) {
       const chips = this.chips;
       if (this._value || !chips || !chips.length) {
         return;
@@ -175,7 +180,11 @@ the License.
       if (removeIndex === -1) {
         return;
       }
+      const chip = chips[removeIndex];
       this._removeChip(removeIndex);
+      setTimeout(() => {
+        this._value = chip.label;
+      });
     }
     /**
      * Handler for `chip-removed` event.
@@ -211,7 +220,10 @@ the License.
       this._inputElement.blur();
     }
 
-    _blurAll() {
+    _inputBlur() {
+      if (this._value) {
+        this._enterHandler();
+      }
       const chips = this.shadowRoot.querySelectorAll('paper-chips');
       for (let i = 0, len = chips.length; i < len; i++) {
         if (chips[i].focused) {
