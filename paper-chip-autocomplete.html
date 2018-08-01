@@ -37,7 +37,7 @@ the License.
     </style>
     <iron-selector selected="{{selectedItem}}" id="selector">
       <template is="dom-repeat" items="[[_suggestions]]" id="repeater">
-        <paper-item>
+        <paper-item on-click="_itemClickHandler">
           <span>[[item.value]]</span>
           <paper-ripple></paper-ripple>
         </paper-item>
@@ -298,6 +298,11 @@ the License.
       } else if (!bottom && visible > treshold) {
         this.scroll(0, treshold);
       }
+    }
+
+    _itemClickHandler(e) {
+      const model = e.model.get('item');
+      setTimeout(() => this._inform(model), 1);
     }
 
     /**
