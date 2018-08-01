@@ -54,7 +54,7 @@ the License.
       on-blur="_blurAll">
       <div class="chips" slot="prefix">
         <template is="dom-repeat" items="[[chips]]">
-          <paper-chip removable="[[_computeChipRemovable(item)]]" on-chip-removed="_chipRemovedHandler" on-focus="_chipFocused" tabindex="-1">
+          <paper-chip removable="[[_computeChipRemovable(item)]]" on-chip-removed="_chipRemovedHandler" on-focus="_chipFocused" tabindex="-1" remove-icon="[[chipRemoveIcon]]">
             <template is="dom-if" if="[[item.icon]]" restamp="true">
               <iron-icon icon="[[item.icon]]" slot="icon"></iron-icon>
             </template>
@@ -123,7 +123,15 @@ the License.
          * `iron-input` from the paper input to position auto suggestions
          * properly to the input real position.
          */
-        _positionTarget: Object
+        _positionTarget: Object,
+        /**
+         * A name of the icon to render on the chip when `removable` property
+         * is set.
+         * By default it referes to Polymer's default icons library, to the
+         * `clear` icon. You must include this library into your document.
+         * You can also use whatever other icons library.
+         */
+        chipRemoveIcon: String
       };
     }
 
