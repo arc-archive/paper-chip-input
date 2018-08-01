@@ -69,6 +69,15 @@ declare namespace ApiElements {
      * properly to the input real position.
      */
     _positionTarget: object|null|undefined;
+
+    /**
+     * A name of the icon to render on the chip when `removable` property
+     * is set.
+     * By default it referes to Polymer's default icons library, to the
+     * `clear` icon. You must include this library into your document.
+     * You can also use whatever other icons library.
+     */
+    chipRemoveIcon: string|null|undefined;
     connectedCallback(): void;
 
     /**
