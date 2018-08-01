@@ -43,7 +43,7 @@ declare namespace ArcBehaviors {
      * the `<iron-input>`'s `bindValue`
      * property, or the value property of your input that is `notify:true`.
      */
-    readonly value: any;
+    value: any;
 
     /**
      * Set to true to disable this input. If you're using PaperInputBehavior to
@@ -259,6 +259,16 @@ declare namespace ArcBehaviors {
      * @param record Polymer's data change record.
      */
     _computeValue(record: object|null): Array<String|null>|null|undefined;
+
+    /**
+     * Restores chips from passed value.
+     * When input's (this element) value change it computes list of chips
+     *
+     * @param value [description]
+     * @param source [description]
+     * @returns [description]
+     */
+    _computeChipsValues(value: any, source: any): any;
 
     /**
      * Tests if given value is allowed to enter when `allowed` property is set.

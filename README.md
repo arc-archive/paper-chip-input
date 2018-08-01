@@ -19,7 +19,7 @@ A material design input with chips
 -->
 
 ```html
-<paper-chip-input label="Input with chips, try 'alarm'" source='[{"value": "Alarm", "icon": "alarm"}]'></paper-chip-input>
+<paper-chip-input label="Input with chips" value='["Alarm"]' source='[{"value": "Alarm", "icon": "alarm"}]'></paper-chip-input>
 ```
 
 ### API components
