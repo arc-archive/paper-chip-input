@@ -329,7 +329,13 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
      * @return {[type]} [description]
      */
     _computeChipsValues(value, source) {
-      if (!value || !value.length || this._cancelValueComputation) {
+      if (this._cancelValueComputation) {
+        return;
+      }
+      if (!value || !value.length) {
+        if (this.chips) {
+          this.chips = [];
+        }
         return;
       }
       source = source || [];
