@@ -11,6 +11,7 @@ A material design input with chips
 <custom-element-demo>
   <template>
     <link rel="import" href="paper-chip-input.html">
+    <link rel="import" href="../iron-icons/iron-icons.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -18,9 +19,9 @@ A material design input with chips
 -->
 
 ```html
-<paper-chip-input></paper-chip-input>
+<paper-chip-input label="Input with chips, try 'alarm'" source='[{"value": "Alarm", "icon": "alarm"}]'></paper-chip-input>
 ```
 
 ### API components
 
-This components is a part of API components ecosystem: https://elements.advancedrestclient.com/
+This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
