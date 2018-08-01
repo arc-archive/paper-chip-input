@@ -46,6 +46,12 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="SuggestionsWithIcons">
+    <template>
+      <paper-chip-input source='[{"value":"c1","icon":"i1"}, {"value":"c2","icon":"i2"}, {"value":"c3","icon":"i3"}]'></paper-chip-input>
+    </template>
+  </test-fixture>
+
   <script>
   suite('Basics', () => {
     let element;
@@ -254,6 +260,43 @@
           done();
         });
       });
+    });
+  });
+
+  suite('Value computation', () => {
+    let element;
+
+    test('Creates chips from value', () => {
+      element = fixture('Basic');
+      element.value = ['test1', 'test2'];
+      assert.typeOf(element.chips, 'array');
+      assert.lengthOf(element.chips, 2);
+    });
+
+    test('Created chip is removable', () => {
+      element = fixture('Basic');
+      element.value = ['test1'];
+      assert.isTrue(element.chips[0].removable);
+    });
+
+    test('Created chip has label from value', () => {
+      element = fixture('Basic');
+      element.value = ['test1'];
+      assert.equal(element.chips[0].label, 'test1');
+    });
+
+    test('Value is unchanged', () => {
+      element = fixture('Basic');
+      element.value = ['test1'];
+      assert.deepEqual(element.value, ['test1']);
+    });
+
+    test('Uses suggestions to render chips', () => {
+      element = fixture('SuggestionsWithIcons');
+      element.value = ['c2'];
+      assert.equal(element.chips[0].label, 'c2', 'Has label');
+      assert.isTrue(element.chips[0].removable, 'Is removable');
+      assert.equal(element.chips[0].icon, 'i2', 'Has icon');
     });
   });
   </script>
