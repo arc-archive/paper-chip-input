@@ -21,7 +21,8 @@
     "paper-styles": "PolymerElements/paper-styles#^2.0.0",
     "iron-icon": "PolymerElements/iron-icon#^2.1.0",
     "iron-scroll-target-behavior": "PolymerElements/iron-scroll-target-behavior#^2.1.0",
-    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#^2.3.0"
+    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#^2.3.0",
+    "iron-selector": "PolymerElements/iron-selector#^2.1.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
