@@ -25,7 +25,7 @@ the License.
     <style>
     :host {
       @apply --shadow-elevation-2dp;
-      background-color: #fff;
+      background-color: var(--paper-chip-autocomplete-background-color);
       overflow: auto;
       @apply --paper-chip-autocomplete;
     }
@@ -55,6 +55,16 @@ the License.
    * An autocomplete element for `paper-chip-input`.
    * It is a lightweigth version of `paper-autocomplete` element.
    *
+   * ### Styling
+   *
+   * ## Styling
+   *
+   * `<paper-chip-autocomplete>` provides the following custom properties and mixins for styling:
+   *
+   * Custom property | Description | Default
+   * ----------------|-------------|----------
+   * `--paper-chip-autocomplete` | Mixin applied to this elment | `{}`
+   * `--paper-chip-autocomplete-background-color` | Background color of the element. | `inherit`
    *
    * @customElement
    * @memberof UiElements
@@ -66,7 +76,9 @@ the License.
   class PaperChipAutocomplete extends
     Polymer.mixinBehaviors(
       [Polymer.IronOverlayBehavior, Polymer.IronScrollTargetBehavior], Polymer.Element) {
-    static get is() { return 'paper-chip-autocomplete'; }
+    static get is() {
+      return 'paper-chip-autocomplete';
+    }
     static get properties() {
       return {
         /**
