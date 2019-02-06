@@ -86,6 +86,16 @@
       });
     });
 
+    test('Ignores empty values', (done) => {
+      element = fixture('Basic');
+      element._value = '';
+      flush(() => {
+        element._enterHandler();
+        assert.isUndefined(element.value, 'array');
+        done();
+      });
+    });
+
     test('Clears input value after accepting input', (done) => {
       element = fixture('Basic');
       element._value = 'test';
@@ -113,6 +123,52 @@
         element._value = 'c-1';
         element._enterHandler();
         assert.equal(element._value, '');
+        done();
+      });
+    });
+
+    test('Allows only "allowed" chips (by value)', (done) => {
+      element = fixture('Allowed');
+      flush(() => {
+        element._value = 'c1';
+        element._enterHandler();
+        assert.equal(element._value, '');
+        done();
+      });
+    });
+
+    test('Ignores values not defined in "allowed" (by value)', (done) => {
+      element = fixture('Allowed');
+      flush(() => {
+        element._value = 'c1';
+        element._enterHandler();
+        assert.typeOf(element.value, 'array');
+        assert.equal(element.value[0], 'c1');
+        done();
+      });
+    });
+
+    test('Allows only "allowed" chips (by id)', (done) => {
+      element = fixture('Allowed');
+      element.source = [{value: 'c1 label', id: 'c1'}];
+      flush(() => {
+        element._value = 'c1 label';
+        element._suggestionsOpened = false;
+        element._enterHandler();
+        assert.typeOf(element.value, 'array');
+        assert.equal(element.value[0], 'c1');
+        done();
+      });
+    });
+
+    test('Ignores values not defined in "allowed" (by id)', (done) => {
+      element = fixture('Allowed');
+      element.source = [{value: 'c1 label', id: 'c-not-allowed'}];
+      flush(() => {
+        element._value = 'c1 label';
+        element._suggestionsOpened = false;
+        element._enterHandler();
+        assert.isUndefined(element.value, 'array');
         done();
       });
     });
