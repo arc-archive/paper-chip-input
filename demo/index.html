@@ -36,6 +36,7 @@
         <div class="vertical-section-container centered" role="main">
           <h2>paper-chip-input component</h2>
           <p>See material design documentation for <a href="https://material.io/design/components/chips.html#usage" target="_blank">chips</a>.</p>
+
           <h2>Basics</h2>
           <paper-chip-input label="Chips input demo" value="{{basicOut}}"></paper-chip-input>
           <template is="dom-if" if="[[basicOut]]">
@@ -50,11 +51,19 @@
             <output>[[predefOut]]</output>
           </template>
 
-          <h2>Validation</h2>
-          <paper-chip-input label="Chips input demo" pattern="[a-zA-Z]+" required auto-validate error-message="Only [a-zA-Z]+ allowed" value="{{validateOut}}"></paper-chip-input>
+          <h2>Validation with pattern</h2>
+          <p>Pattern: <i>[a-zA-Z]+</i></p>
+          <paper-chip-input label="Chips input demo" pattern="[a-zA-Z]+" auto-validate error-message="Only [a-zA-Z]+ allowed" value="{{validateOut}}"></paper-chip-input>
           <template is="dom-if" if="[[validateOut]]">
             <label>Value:</label>
             <output>[[validateOut]]</output>
+          </template>
+
+          <h2>Required input</h2>
+          <paper-chip-input label="Chips input demo" required auto-validate error-message="This input is required" value="{{validate2Out}}"></paper-chip-input>
+          <template is="dom-if" if="[[validate2Out]]">
+            <label>Value:</label>
+            <output>[[validate2Out]]</output>
           </template>
 
           <h2>Allowed chips only</h2>
@@ -67,7 +76,7 @@
 
           <h2>Simple auto suggestions</h2>
           <p>Try a name of a fruit</p>
-          <paper-chip-input label="Type your favourite frouts" value="{{auto1Out}}" source="[[simpleSuggestions]]"></paper-chip-input>
+          <paper-chip-input label="Type your favourite fruits" value="{{auto1Out}}" source="[[simpleSuggestions]]"></paper-chip-input>
           <template is="dom-if" if="[[auto1Out]]">
             <label>Value:</label>
             <output>[[auto1Out]]</output>
@@ -75,10 +84,34 @@
 
           <h2>Suggestions with icons</h2>
           <p>Start with "<b>b</b>"</p>
-          <paper-chip-input label="Type your favourite frouts" value="{{auto2Out}}" source="[[iconSuggestions]]"></paper-chip-input>
+          <paper-chip-input label="Type your favourite fruits" value="{{auto2Out}}" source="[[iconSuggestions]]"></paper-chip-input>
           <template is="dom-if" if="[[auto2Out]]">
             <label>Value:</label>
             <output>[[auto2Out]]</output>
+          </template>
+
+          <h2>Restoring values with suggestions with icons</h2>
+          <p>Chips have icons restored from suggestions from passed value</p>
+          <paper-chip-input label="Type your favourite fruits" value="{{auto5Out}}" source="[[iconSuggestions]]"></paper-chip-input>
+          <template is="dom-if" if="[[auto5Out]]">
+            <label>Value:</label>
+            <output>[[auto5Out]]</output>
+          </template>
+
+          <h2>Suggestions with IDs</h2>
+          <p>Similar to the above but the returned value is the "id" set on suggestion.</p>
+          <paper-chip-input label="Type your favourite fruits" value="{{auto3Out}}" source="[[idSuggestions]]"></paper-chip-input>
+          <template is="dom-if" if="[[auto3Out]]">
+            <label>Value:</label>
+            <output>[[auto3Out]]</output>
+          </template>
+
+          <h2>Restoring from IDs</h2>
+          <p>Chips are restored from suggestions from passed value containing IDs.</p>
+          <paper-chip-input label="Type your favourite fruits" value="{{auto4Out}}" source="[[idSuggestions]]"></paper-chip-input>
+          <template is="dom-if" if="[[auto4Out]]">
+            <label>Value:</label>
+            <output>[[auto4Out]]</output>
           </template>
         </div>
       </template>
@@ -127,6 +160,51 @@
         value: 'Movies!',
         icon: 'maps:local-movies'
       }];
+
+      app.idSuggestions = [{
+        value: 'Biking',
+        icon: 'maps:directions-bike',
+        id: 'activity-1'
+      }, {
+        value: 'Boat trip',
+        icon: 'maps:directions-boat',
+        id: 'activity-2'
+      }, {
+        value: 'Bus trip',
+        icon: 'maps:directions-bus',
+        id: 'activity-3'
+      }, {
+        value: 'Car trip',
+        icon: 'maps:directions-car',
+        id: 'activity-4'
+      }, {
+        value: 'Train trip',
+        icon: 'maps:directions-railway',
+        id: 'activity-5'
+      }, {
+        value: 'Running',
+        icon: 'maps:directions-run',
+        id: 'activity-6'
+      }, {
+        value: 'Hiking',
+        icon: 'maps:directions-walk',
+        id: 'activity-7'
+      }, {
+        value: 'Reading',
+        icon: 'maps:local-library',
+        id: 'activity-8'
+      }, {
+        value: 'Shopping',
+        icon: 'maps:local-grocery-store',
+        id: 'activity-9'
+      }, {
+        value: 'Movies!',
+        icon: 'maps:local-movies',
+        id: 'activity-10'
+      }];
+
+      app.auto4Out = ['activity-1', 'activity-2'];
+      app.auto5Out = ['Biking', 'Shopping'];
 
       // app._load = function() {
       //

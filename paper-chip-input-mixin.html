@@ -206,6 +206,9 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
          * which is used to render `<iron-icon>`. It may also contain
          * `image` property which is used to pass to `<iron-image>` element.
          *
+         * If the suggestion item contains `id` property it's value will be returned
+         * as a value of the input. Otherwise `value` is used.
+         *
          * ### Example
          *
          * ```json
@@ -218,6 +221,10 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
          *  {
          *    "value": "Image item",
          *    "image": "path/to/image.png"
+         *  },
+         *  {
+         *    "value": "Rendered label",
+         *    "id": "returned-value"
          *  }
          * ]
          * ```
@@ -285,8 +292,9 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
      * @param {String} label Label of the chip
      * @param {?Boolean} removable True if the chip can be removed.
      * @param {?String} icon An icon to pass to the chip.
+     * @param {?String} id An ID to be used as a value.
      */
-    addChip(label, removable, icon) {
+    addChip(label, removable, icon, id) {
       if (!this.chips) {
         this.chips = [];
       }
@@ -300,14 +308,14 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
       this.push('chips', {
         label,
         removable,
-        icon
+        icon,
+        id
       });
     }
     /**
      * Computes value of the form input. Produced value is an array of chip
      * labels.
      * @param {Object} record Polymer's data change record.
-     * @return {Array<String>|undefined}
      */
     _computeValue(record) {
       if ((record.path !== 'chips.length' && record.path !== 'chips') || !record.base) {
@@ -316,7 +324,7 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
       if (this._cancelValueComputation) {
         return;
       }
-      const result = record.base.map((item) => item.label);
+      const result = record.base.map((item) => item.id || item.label);
       this._cancelValueComputation = true;
       this.set('value', result);
       this._cancelValueComputation = false;
@@ -324,9 +332,8 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
     /**
      * Restores chips from passed value.
      * When input's (this element) value change it computes list of chips
-     * @param {[type]} value [description]
-     * @param {[type]} source [description]
-     * @return {[type]} [description]
+     * @param {Array<Object>} value List of chips definitions
+     * @param {Array<Object>} source List of suggestions
      */
     _computeChipsValues(value, source) {
       if (this._cancelValueComputation) {
@@ -342,30 +349,18 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
       const newChips = [];
       for (let i = 0, len = value.length; i < len; i++) {
         const _value = value[i];
-        if (!_value || !_value.toLowerCase) {
+        if (!_value || typeof _value !== 'string') {
           continue;
         }
         const _lowerValue = _value.toLowerCase();
-        let _source;
-        for (let j = 0, jLen = source.length; j < jLen; j++) {
-          if (typeof source[j] === 'string') {
-            if (source[j].toLowerCase() === _lowerValue) {
-              break;
-            }
-            // No useful information anyway
-            continue;
-          }
-          if (source[j].value && source[j].value.toLowerCase() === _lowerValue) {
-            _source = source[j];
-            break;
-          }
-        }
+        const _source = this._findSource(source, _lowerValue, _value);
         const chip = {
-          removable: true,
+          removable: true
         };
-        if (_source) {
+        if (_source && typeof _source === 'object') {
           chip.label = _source.value;
           chip.icon = _source.icon;
+          chip.id = _source.id;
         } else {
           chip.label = _value;
         }
@@ -374,17 +369,60 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
       this.chips = newChips;
     }
     /**
+     * Finsd a suggestion source in the list of suggestions.
+     * Primarly it looks for a value (lowercasing it) and then it compares
+     * `id` if defined.
+     * @param {Array<Object|String>} source List of suggestions passed to the element
+     * @param {String} value Search value. Should be lowercased before calling this function
+     * @param {?String} id Optional ID to compare.
+     * @return {String|Object|undefined} Suggestion source or undefined if not found.
+     */
+    _findSource(source, value, id) {
+      if (!source || !source.length) {
+        return;
+      }
+      for (let i = 0; i < source.length; i++) {
+        const item = source[i];
+        if (typeof item === 'string') {
+          if (!item) {
+            // Empty string
+            continue;
+          }
+          const lowerItem = item.toLowerCase();
+          if (lowerItem === value || lowerItem === id) {
+            return item;
+          }
+          continue;
+        }
+        const itemValue = source[i].value;
+        if (itemValue && typeof itemValue === 'string' && itemValue.toLowerCase() === value) {
+          return item;
+        }
+        if (!id) {
+          continue;
+        }
+        const itemId = source[i].id;
+        if (itemId && itemId === id) {
+          return item;
+        }
+      }
+    }
+    /**
      * Tests if given value is allowed to enter when `allowed` property is set.
      * @param {String} value The value to test
+     * @param {?String} id The Suggestion id, if any.
      * @return {Boolean} True if the value is allowed as a chip label.
      */
-    _isAllowed(value) {
+    _isAllowed(value, id) {
       const allowed = this.allowed;
       if (!allowed || !allowed.length || !value) {
         return true;
       }
       const lowerValue = value.toLowerCase();
       for (let i = 0, len = allowed.length; i < len; i++) {
+        if (id && id === allowed[i]) {
+          return true;
+        }
         if (allowed[i].toLowerCase && allowed[i].toLowerCase() === lowerValue) {
           return true;
         }
@@ -400,7 +438,7 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
       this.splice('chips', index, 1);
       if (this.chips.length === 0) {
         this.validate();
-        this.chips = undefined;
+        // this.chips = undefined;
       }
     }
   }

@@ -16,6 +16,18 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="BasicRequired">
+    <template>
+      <paper-chip-input required></paper-chip-input>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="Pattern">
+    <template>
+      <paper-chip-input pattern="[a-zA-Z]+"></paper-chip-input>
+    </template>
+  </test-fixture>
+
   <test-fixture id="Chips">
     <template>
       <paper-chip-input chips='[{"label": "c-1"}, {"label": "c-2", "removable": true}, {"label": "c-3"}]'></paper-chip-input>
@@ -384,6 +396,167 @@
         assert.lengthOf(element.chips, 0);
         done();
       });
+    });
+  });
+
+  suite('_chipFocused()', () => {
+    let element;
+    let ev;
+    setup((done) => {
+      element = fixture('Basic');
+      ev = {
+        preventDefault: () => {},
+        stopPropagation: () => {},
+        stopImmediatePropagation: () => {}
+      };
+      flush(() => done());
+    });
+
+    test('Prevents default', () => {
+      const spy = sinon.spy(ev, 'preventDefault');
+      element._chipFocused(ev);
+      assert.isTrue(spy.called);
+    });
+
+    test('Stops propagation', () => {
+      const spy = sinon.spy(ev, 'stopPropagation');
+      element._chipFocused(ev);
+      assert.isTrue(spy.called);
+    });
+
+    test('Stops propagation on element', () => {
+      const spy = sinon.spy(ev, 'stopImmediatePropagation');
+      element._chipFocused(ev);
+      assert.isTrue(spy.called);
+    });
+  });
+
+  suite('_inputBlur()', () => {
+    let element;
+    setup((done) => {
+      element = fixture('Basic');
+      flush(() => done());
+    });
+
+    test('Calls _enterHandler() when value', () => {
+      element._value = 'test';
+      const spy = sinon.spy(element, '_enterHandler');
+      element._inputBlur();
+      assert.isTrue(spy.called);
+    });
+
+    test('Won\'t call _enterHandler() when no value', () => {
+      element._value = '';
+      const spy = sinon.spy(element, '_enterHandler');
+      element._inputBlur();
+      assert.isFalse(spy.called);
+    });
+  });
+
+  suite('validate()', () => {
+    test('Returns true when no chips', (done) => {
+      const element = fixture('Basic');
+      flush(() => {
+        const result = element.validate();
+        assert.isTrue(result);
+        done();
+      });
+    });
+
+    test('Returns false when no chips and required', (done) => {
+      const element = fixture('BasicRequired');
+      element.value = ['test'];
+      flush(() => {
+        element._removeChip(0);
+        const result = element.validate();
+        assert.isFalse(result);
+        done();
+      });
+    });
+
+    test('Returns false when pattern do not match', (done) => {
+      const element = fixture('Pattern');
+      element.value = ['test'];
+      flush(() => {
+        element._value = 'test value';
+        const result = element.validate();
+        assert.isFalse(result);
+        done();
+      });
+    });
+  });
+
+  suite('_autofocusChanged()', () => {
+    test('Calls _autofocusChanged() when property change', (done) => {
+      const element = fixture('Basic');
+      flush(() => {
+        const spy = sinon.spy(element, '_autofocusChanged');
+        element.autofocus = true;
+        assert.isTrue(spy.called);
+        done();
+      });
+    });
+  });
+
+  suite('_findSource()', () => {
+    let element;
+    setup(() => {
+      element = fixture('Basic');
+    });
+
+    test('Returns undefine when no source', () => {
+      const result = element._findSource();
+      assert.isUndefined(result);
+    });
+
+    test('Returns undefine when source empty', () => {
+      const result = element._findSource([]);
+      assert.isUndefined(result);
+    });
+
+    test('Finds string item by value', () => {
+      const result = element._findSource(['test'], 'test');
+      assert.equal(result, 'test');
+    });
+
+    test('Ignores empty values', () => {
+      const result = element._findSource(['', 'test'], 'test');
+      assert.equal(result, 'test');
+    });
+
+    test('Ignores case of source', () => {
+      const result = element._findSource(['', 'Test'], 'test');
+      assert.equal(result, 'Test');
+    });
+
+    test('Returns undefined when not found', () => {
+      const result = element._findSource(['Test'], 'other');
+      assert.isUndefined(result);
+    });
+
+    test('Finds string item by id', () => {
+      const result = element._findSource(['test'], '', 'test');
+      assert.equal(result, 'test');
+    });
+
+    test('Finds object item by value', () => {
+      const result = element._findSource([{value: 'test'}], 'test');
+      assert.deepEqual(result, {value: 'test'});
+    });
+
+    test('Finds object item by id', () => {
+      const result = element._findSource([{value: 'test', id: 'other'}], 'other', 'other');
+      assert.deepEqual(result, {value: 'test', id: 'other'});
+    });
+
+    test('Returns undefined when not found in objects', () => {
+      const result = element._findSource([{value: 'test', id: 'id'}], 'other', 'other');
+      assert.isUndefined(result);
+    });
+
+    test('Returns undefined when not found in objects and no id', () => {
+      const result = element._findSource([{value: 'test', id: 'id'}], 'other');
+      assert.isUndefined(result);
     });
   });
   </script>

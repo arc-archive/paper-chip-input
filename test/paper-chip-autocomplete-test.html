@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <title>paper-chip-input test</title>
+  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../../iron-icons/iron-icons.html">
+  <link rel="import" href="../paper-chip-autocomplete.html">
+</head>
+
+<body>
+  <test-fixture id="Basic">
+    <template>
+      <paper-chip-autocomplete></paper-chip-autocomplete>
+    </template>
+  </test-fixture>
+  <script>
+  suite('selectPrevious()', () => {
+    let element;
+    const source = ['Apple', 'Appli', 'Applo'];
+    setup(function(done) {
+      element = fixture('Basic');
+      element.source = source;
+      element.opened = true;
+      element.value = 'A';
+      flush(() => done());
+    });
+    test('Selectes previous element', () => {
+      element.selectedItem = 1;
+      element.selectPrevious();
+      assert.equal(element.selectedItem, 0);
+    });
+    test('Opens the overlay', () => {
+      element.opened = false;
+      element.selectedItem = 1;
+      element.selectPrevious();
+      assert.isTrue(element.opened);
+    });
+    test('Does nothing when no suggestions', () => {
+      element.value = '';
+      element.opened = false;
+      element.selectedItem = 1;
+      element.selectPrevious();
+      assert.isFalse(element.opened);
+    });
+    test('Goes to the end of the list', () => {
+      element.selectedItem = 0;
+      element.selectPrevious();
+      assert.equal(element.selectedItem, 2);
+    });
+    test('Calls ensureItemVisible()', () => {
+      const spy = sinon.spy(element, 'ensureItemVisible');
+      element.selectedItem = 1;
+      element.selectPrevious();
+      assert.isTrue(spy.called);
+    });
+  });
+  suite('selectNext()', () => {
+    let element;
+    const source = ['Apple', 'Appli', 'Applo'];
+    setup(function(done) {
+      element = fixture('Basic');
+      element.source = source;
+      element.opened = true;
+      element.value = 'A';
+      flush(() => done());
+    });
+    test('Selectes previous element', () => {
+      element.selectedItem = 1;
+      element.selectNext();
+      assert.equal(element.selectedItem, 2);
+    });
+    test('Opens the overlay', () => {
+      element.opened = false;
+      element.selectedItem = 1;
+      element.selectNext();
+      assert.isTrue(element.opened);
+    });
+    test('Does nothing when no suggestions', () => {
+      element.value = '';
+      element.opened = false;
+      element.selectedItem = 1;
+      element.selectNext();
+      assert.isFalse(element.opened);
+    });
+    test('Goes to the start of the list', () => {
+      element.selectedItem = 2;
+      element.selectNext();
+      assert.equal(element.selectedItem, 0);
+    });
+    test('Calls ensureItemVisible()', () => {
+      const spy = sinon.spy(element, 'ensureItemVisible');
+      element.selectedItem = 1;
+      element.selectNext();
+      assert.isTrue(spy.called);
+    });
+  });
+
+  suite('acceptSelection()', () => {
+    let element;
+    const source = ['Apple', 'Appli', 'Applo'];
+    setup(function(done) {
+      element = fixture('Basic');
+      element.source = source;
+      element.opened = true;
+      element.value = 'A';
+      flush(() => done());
+    });
+
+    test('Should fire `selected` event.', function(done) {
+      element.addEventListener('selected', function f() {
+        element.removeEventListener('selected', f);
+        done();
+      });
+      setTimeout(function() {
+        element.acceptSelection();
+      }, 100);
+    });
+  });
+  </script>
+</body>
+
+</html>
