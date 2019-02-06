@@ -8,6 +8,10 @@
  *   paper-chip-input-mixin.html
  */
 
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
 /// <reference path="../polymer/types/lib/utils/mixin.d.ts" />
 
 declare namespace ArcBehaviors {
@@ -211,6 +215,9 @@ declare namespace ArcBehaviors {
      * which is used to render `<iron-icon>`. It may also contain
      * `image` property which is used to pass to `<iron-image>` element.
      *
+     * If the suggestion item contains `id` property it's value will be returned
+     * as a value of the input. Otherwise `value` is used.
+     *
      * ### Example
      *
      * ```json
@@ -223,6 +230,10 @@ declare namespace ArcBehaviors {
      *  {
      *    "value": "Image item",
      *    "image": "path/to/image.png"
+     *  },
+     *  {
+     *    "value": "Rendered label",
+     *    "id": "returned-value"
      *  }
      * ]
      * ```
@@ -249,8 +260,9 @@ declare namespace ArcBehaviors {
      * @param label Label of the chip
      * @param removable True if the chip can be removed.
      * @param icon An icon to pass to the chip.
+     * @param id An ID to be used as a value.
      */
-    addChip(label: String|null, removable: Boolean|null, icon: String|null): void;
+    addChip(label: String|null, removable: Boolean|null, icon: String|null, id: String|null): void;
 
     /**
      * Computes value of the form input. Produced value is an array of chip
@@ -258,25 +270,37 @@ declare namespace ArcBehaviors {
      *
      * @param record Polymer's data change record.
      */
-    _computeValue(record: object|null): Array<String|null>|null|undefined;
+    _computeValue(record: object|null): void;
 
     /**
      * Restores chips from passed value.
      * When input's (this element) value change it computes list of chips
      *
-     * @param value [description]
-     * @param source [description]
-     * @returns [description]
+     * @param value List of chips definitions
+     * @param source List of suggestions
      */
-    _computeChipsValues(value: any, source: any): any;
+    _computeChipsValues(value: Array<object|null>|null, source: Array<object|null>|null): void;
+
+    /**
+     * Finsd a suggestion source in the list of suggestions.
+     * Primarly it looks for a value (lowercasing it) and then it compares
+     * `id` if defined.
+     *
+     * @param source List of suggestions passed to the element
+     * @param value Search value. Should be lowercased before calling this function
+     * @param id Optional ID to compare.
+     * @returns Suggestion source or undefined if not found.
+     */
+    _findSource(source: Array<object|String|null>|null, value: String|null, id: String|null): String|object|null|undefined;
 
     /**
      * Tests if given value is allowed to enter when `allowed` property is set.
      *
      * @param value The value to test
+     * @param id The Suggestion id, if any.
      * @returns True if the value is allowed as a chip label.
      */
-    _isAllowed(value: String|null): Boolean|null;
+    _isAllowed(value: String|null, id: String|null): Boolean|null;
 
     /**
      * Removes a chip on a specific index.

@@ -9,7 +9,7 @@
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.5.1"
+    "@polymer/gen-typescript-declarations": "^1.6.1"
   },
   "private": false,
   "scripts": {

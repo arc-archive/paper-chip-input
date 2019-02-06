@@ -8,6 +8,9 @@
  *   paper-chip-input.html
  */
 
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+
 /// <reference path="../polymer/types/polymer-element.d.ts" />
 /// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
 /// <reference path="../paper-input/paper-input.d.ts" />
@@ -89,7 +92,7 @@ declare namespace ApiElements {
     /**
      * Removes latest chip if there's no value in the text field.
      */
-    _backspaceHandler(e: any): void;
+    _backspaceHandler(): void;
 
     /**
      * Handler for `chip-removed` event.
