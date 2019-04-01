@@ -43,15 +43,15 @@
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "dependencies": {
-    "@polymer/polymer": "^3.0.0",
-    "@polymer/paper-input": "^3.0.0",
+    "@advanced-rest-client/paper-chip": "^3.0.0-preview.1",
     "@polymer/iron-a11y-keys": "^3.0.0",
+    "@polymer/iron-icon": "^3.0.0",
+    "@polymer/iron-overlay-behavior": "^3.0.0",
+    "@polymer/iron-scroll-target-behavior": "^3.0.0",
+    "@polymer/iron-selector": "^3.0.0",
+    "@polymer/paper-input": "^3.0.0",
     "@polymer/paper-item": "^3.0.0",
     "@polymer/paper-ripple": "^3.0.0",
-    "@polymer/paper-styles": "^3.0.0",
-    "@polymer/iron-icon": "^3.0.0",
-    "@polymer/iron-scroll-target-behavior": "^3.0.0",
-    "@polymer/iron-overlay-behavior": "^3.0.0",
-    "@polymer/iron-selector": "^3.0.0"
+    "@polymer/polymer": "^3.0.0"
   }
 }

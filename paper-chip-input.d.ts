@@ -5,20 +5,13 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   paper-chip-input.html
+ *   paper-chip-input.js
  */
 
 
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
-/// <reference path="../paper-input/paper-input.d.ts" />
-/// <reference path="../paper-chip/paper-chip.d.ts" />
-/// <reference path="../iron-a11y-keys/iron-a11y-keys.d.ts" />
-/// <reference path="../iron-icon/iron-icon.d.ts" />
-/// <reference path="paper-chip-input-mixin.d.ts" />
-/// <reference path="paper-chip-autocomplete.d.ts" />
+import {PaperChipInputMixin} from './paper-chip-input-mixin.js';
 
 declare namespace ApiElements {
 
@@ -53,12 +46,11 @@ declare namespace ApiElements {
    *
    * Custom property | Description | Default
    * ----------------|-------------|----------
-   * `--paper-chip-input` | Mixin applied to this elment | `{}`
    *
    * Use `paper-input` and `paper-chip` styles to style the element.
    */
   class PaperChipInput extends
-    ArcBehaviors.PaperChipInputMixin(
+    PaperChipInputMixin(
     Object) {
 
     /**
@@ -114,6 +106,9 @@ declare namespace ApiElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "paper-chip-input": ApiElements.PaperChipInput;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "paper-chip-input": ApiElements.PaperChipInput;
+  }
 }

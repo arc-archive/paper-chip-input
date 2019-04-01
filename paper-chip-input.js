@@ -15,16 +15,14 @@ the License.
   from HTML and may be out of place here. Review them and
   then delete this comment!
 */
-import { PolymerElement } from '../../@polymer/polymer/polymer-element.js';
-
-import '../../@polymer/polymer/lib/elements/dom-if.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {PaperChipInputMixin} from './paper-chip-input-mixin.js';
+import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
 import '../../@polymer/paper-input/paper-input.js';
-import '../../paper-chip/paper-chip.js';
+import '../../@advanced-rest-client/paper-chip/paper-chip.js';
 import '../../@polymer/iron-a11y-keys/iron-a11y-keys.js';
 import '../../@polymer/iron-icon/iron-icon.js';
-import './paper-chip-input-mixin.js';
 import './paper-chip-autocomplete.js';
-import { html } from '../../@polymer/polymer/lib/utils/html-tag.js';
 /**
  * `paper-chip-input`
  *
@@ -56,7 +54,6 @@ import { html } from '../../@polymer/polymer/lib/utils/html-tag.js';
  *
  * Custom property | Description | Default
  * ----------------|-------------|----------
- * `--paper-chip-input` | Mixin applied to this elment | `{}`
  *
  * Use `paper-input` and `paper-chip` styles to style the element.
  *
@@ -64,16 +61,15 @@ import { html } from '../../@polymer/polymer/lib/utils/html-tag.js';
  * @polymer
  * @demo demo/index.html
  * @memberof ApiElements
- * @appliesMixin ArcBehaviors.PaperChipInputMixin
+ * @appliesMixin PaperChipInputMixin
  */
-class PaperChipInput extends ArcBehaviors.PaperChipInputMixin(PolymerElement) {
+class PaperChipInput extends PaperChipInputMixin(PolymerElement) {
   static get template() {
     return html`
     <style>
     :host {
       display: block;
       position: relative;
-      @apply --paper-chip-input;
 
       --paper-input-container-input: {
         min-width: 170px;
@@ -81,27 +77,69 @@ class PaperChipInput extends ArcBehaviors.PaperChipInputMixin(PolymerElement) {
     }
 
     .chips {
-      @apply --layout-horizontal;
-      @apply --layout-center;
-      @apply --layout-wrap;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
     }
     </style>
-    <paper-input class="input-input" always-float-label="[[alwaysFloatLabel]]" no-label-float="[[!alwaysFloatLabel]]" auto-validate="[[autoValidate]]" disabled="[[disabled]]" readonly="[[readonly]]" value="{{_value}}" label="[[label]]" allowed-pattern="[[allowedPattern]]" pattern="[[pattern]]" char-counter="[[charCounter]]" invalid="{{invalid}}" error-message="[[errorMessage]]" validator="[[validator]]" autofocus="[[autofocus]]" inputmode="[[inputmode]]" minlength="[[minlength]]" maxlength="[[maxlength]]" name="[[name]]" placeholder="[[placeholder]]" autocapitalize="[[autocapitalize]]" autocorrect="[[autocorrect]]" autosave="[[autosave]]" on-blur="_inputBlur">
+    <paper-input
+      class="input-input"
+      always-float-label="[[alwaysFloatLabel]]"
+      no-label-float="[[!alwaysFloatLabel]]"
+      auto-validate="[[autoValidate]]"
+      disabled="[[disabled]]"
+      readonly="[[readonly]]"
+      value="{{_value}}"
+      label="[[label]]"
+      allowed-pattern="[[allowedPattern]]"
+      pattern="[[pattern]]"
+      char-counter="[[charCounter]]"
+      invalid="{{invalid}}"
+      error-message="[[errorMessage]]"
+      validator="[[validator]]"
+      autofocus="[[autofocus]]"
+      inputmode="[[inputmode]]"
+      minlength="[[minlength]]"
+      maxlength="[[maxlength]]"
+      name="[[name]]"
+      placeholder="[[placeholder]]"
+      autocapitalize="[[autocapitalize]]"
+      autocorrect="[[autocorrect]]"
+      autosave="[[autosave]]"
+      on-blur="_inputBlur">
       <div class="chips" slot="prefix">
         <template is="dom-repeat" items="[[chips]]">
-          <paper-chip removable="[[_computeChipRemovable(item)]]" on-chip-removed="_chipRemovedHandler" on-focus="_chipFocused" tabindex="-1" remove-icon="[[chipRemoveIcon]]">
+          <paper-chip
+            removable="[[_computeChipRemovable(item)]]"
+            on-chip-removed="_chipRemovedHandler"
+            on-focus="_chipFocused"
+            tabindex="-1"
+            remove-icon="[[chipRemoveIcon]]">
             <template is="dom-if" if="[[item.icon]]" restamp="true">
               <iron-icon icon="[[item.icon]]" slot="icon"></iron-icon>
             </template>
             [[item.label]]
           </paper-chip>
         </template>
-			</div>
+      </div>
     </paper-input>
-    <paper-chip-autocomplete source="[[source]]" value="[[_value]]" position-target="[[_positionTarget]]" input-target="[[_inputElement]]" dynamic-align="" vertical-align="top" vertical-offset="36" horizontal-align="left" on-selected="_suggestionSelected" opened="{{_suggestionsOpened}}"></paper-chip-autocomplete>
-    <iron-a11y-keys target="[[_inputElement]]" keys="enter" on-keys-pressed="_enterHandler"></iron-a11y-keys>
-		<iron-a11y-keys target="[[_inputElement]]" keys="backspace" on-keys-pressed="_backspaceHandler"></iron-a11y-keys>
-`;
+    <paper-chip-autocomplete
+      source="[[source]]" value="[[_value]]"
+      position-target="[[_positionTarget]]"
+      input-target="[[_inputElement]]"
+      dynamic-align=""
+      vertical-align="top"
+      vertical-offset="36"
+      horizontal-align="left"
+      on-selected="_suggestionSelected"
+      opened="{{_suggestionsOpened}}"></paper-chip-autocomplete>
+    <iron-a11y-keys
+      target="[[_inputElement]]"
+      keys="enter" on-keys-pressed="_enterHandler"></iron-a11y-keys>
+    <iron-a11y-keys
+      target="[[_inputElement]]"
+      keys="backspace" on-keys-pressed="_backspaceHandler"></iron-a11y-keys>`;
   }
 
   static get is() {

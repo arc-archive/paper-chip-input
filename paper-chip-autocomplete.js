@@ -15,17 +15,15 @@ the License.
   from HTML and may be out of place here. Review them and
   then delete this comment!
 */
-import { PolymerElement } from '../../@polymer/polymer/polymer-element.js';
-
-import { mixinBehaviors } from '../../@polymer/polymer/lib/legacy/class.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {mixinBehaviors} from '../../@polymer/polymer/lib/legacy/class.js';
 import '../../@polymer/iron-a11y-keys/iron-a11y-keys.js';
 import '../../@polymer/paper-ripple/paper-ripple.js';
 import '../../@polymer/paper-item/paper-item.js';
-import '../../@polymer/paper-styles/shadow.js';
 import '../../@polymer/iron-selector/iron-selector.js';
-import { IronScrollTargetBehavior } from '../../@polymer/iron-scroll-target-behavior/iron-scroll-target-behavior.js';
-import { IronOverlayBehavior } from '../../@polymer/iron-overlay-behavior/iron-overlay-behavior.js';
-import { html } from '../../@polymer/polymer/lib/utils/html-tag.js';
+import {IronScrollTargetBehavior} from '../../@polymer/iron-scroll-target-behavior/iron-scroll-target-behavior.js';
+import {IronOverlayBehavior} from '../../@polymer/iron-overlay-behavior/iron-overlay-behavior.js';
+import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
 /**
  * An autocomplete element for `paper-chip-input`.
  * It is a lightweigth version of `paper-autocomplete` element.
@@ -38,7 +36,6 @@ import { html } from '../../@polymer/polymer/lib/utils/html-tag.js';
  *
  * Custom property | Description | Default
  * ----------------|-------------|----------
- * `--paper-chip-autocomplete` | Mixin applied to this elment | `{}`
  * `--paper-chip-autocomplete-background-color` | Background color of the element. | `inherit`
  *
  * @customElement
@@ -55,15 +52,15 @@ class PaperChipAutocomplete extends
     return html`
     <style>
     :host {
-      @apply --shadow-elevation-2dp;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+                  0 1px 5px 0 rgba(0, 0, 0, 0.12),
+                  0 3px 1px -2px rgba(0, 0, 0, 0.2);
       background-color: var(--paper-chip-autocomplete-background-color);
       overflow: auto;
-      @apply --paper-chip-autocomplete;
     }
 
     paper-item {
       position: relative;
-      @apply --paper-chip-autocomplete-item;
     }
     </style>
     <iron-selector selected="{{selectedItem}}" id="selector">
@@ -79,8 +76,8 @@ class PaperChipAutocomplete extends
     <iron-a11y-keys id="a11y" target="[[inputTarget]]" keys="enter" on-keys-pressed="acceptSelection"></iron-a11y-keys>
     <iron-a11y-keys id="a11y" target="[[scrollTarget]]" keys="up" on-keys-pressed="selectPrevious"></iron-a11y-keys>
     <iron-a11y-keys id="a11y" target="[[scrollTarget]]" keys="down" on-keys-pressed="selectNext"></iron-a11y-keys>
-    <iron-a11y-keys id="a11y" target="[[scrollTarget]]" keys="enter" on-keys-pressed="acceptSelection"></iron-a11y-keys>
-`;
+    <iron-a11y-keys id="a11y" target="[[scrollTarget]]"
+      keys="enter" on-keys-pressed="acceptSelection"></iron-a11y-keys>`;
   }
 
   static get is() {

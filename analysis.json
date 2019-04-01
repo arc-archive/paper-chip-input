@@ -1,1315 +1,10 @@
 {
   "schema_version": "1.0.0",
-  "namespaces": [
-    {
-      "name": "ArcBehaviors",
-      "description": "",
-      "summary": "",
-      "sourceRange": {
-        "file": "paper-chip-input-mixin.html",
-        "start": {
-          "line": 21,
-          "column": 2
-        },
-        "end": {
-          "line": 21,
-          "column": 27
-        }
-      },
-      "mixins": [
-        {
-          "description": "A behavior to be implemented with inputs that uses `paper-chips`.",
-          "summary": "",
-          "path": "paper-chip-input-mixin.html",
-          "properties": [
-            {
-              "name": "_inputElement",
-              "type": "Object | null | undefined",
-              "description": "A paper input element.",
-              "privacy": "protected",
-              "sourceRange": {
-                "start": {
-                  "line": 41,
-                  "column": 8
-                },
-                "end": {
-                  "line": 41,
-                  "column": 29
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Object"
-                }
-              }
-            },
-            {
-              "name": "label",
-              "type": "string | null | undefined",
-              "description": "The label for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\n`<label>`'s content and `hidden` property, e.g.\n`<label hidden$=\"[[!label]]\">[[label]]</label>` in your `template`",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 48,
-                  "column": 8
-                },
-                "end": {
-                  "line": 48,
-                  "column": 29
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              }
-            },
-            {
-              "name": "value",
-              "type": "*",
-              "description": "The value for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<iron-input>`'s `bindValue`\nproperty, or the value property of your input that is `notify:true`.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 56,
-                  "column": 8
-                },
-                "end": {
-                  "line": 56,
-                  "column": 42
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "notify": true,
-                  "attributeType": "Array"
-                }
-              }
-            },
-            {
-              "name": "disabled",
-              "type": "boolean | null | undefined",
-              "description": "Set to true to disable this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nboth the `<paper-input-container>`'s and the input's `disabled` property.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 62,
-                  "column": 8
-                },
-                "end": {
-                  "line": 62,
-                  "column": 33
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Boolean"
-                }
-              }
-            },
-            {
-              "name": "invalid",
-              "type": "boolean | null | undefined",
-              "description": "Returns true if the value is invalid. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to both the\n`<paper-input-container>`'s and the input's `invalid` property.\n\nIf `autoValidate` is true, the `invalid` attribute is managed\nautomatically, which can clobber attempts to manage it manually.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 71,
-                  "column": 8
-                },
-                "end": {
-                  "line": 71,
-                  "column": 46
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "notify": true,
-                  "attributeType": "Boolean"
-                }
-              }
-            },
-            {
-              "name": "allowedPattern",
-              "type": "string | null | undefined",
-              "description": "Set this to specify the pattern allowed by `preventInvalidInput`. If\nyou're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `allowedPattern`\nproperty.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 78,
-                  "column": 8
-                },
-                "end": {
-                  "line": 78,
-                  "column": 38
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              }
-            },
-            {
-              "name": "alwaysFloatLabel",
-              "type": "boolean | null | undefined",
-              "description": "Set to true to always float the label. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to the\n`<paper-input-container>`'s `alwaysFloatLabel` property.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 84,
-                  "column": 8
-                },
-                "end": {
-                  "line": 84,
-                  "column": 55
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Boolean"
-                }
-              },
-              "defaultValue": "false"
-            },
-            {
-              "name": "pattern",
-              "type": "string | null | undefined",
-              "description": "A pattern to validate the `input` with. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `pattern` property.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 90,
-                  "column": 8
-                },
-                "end": {
-                  "line": 90,
-                  "column": 31
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              }
-            },
-            {
-              "name": "required",
-              "type": "boolean | null | undefined",
-              "description": "Set to true to mark the input as required. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `required` property.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 96,
-                  "column": 8
-                },
-                "end": {
-                  "line": 96,
-                  "column": 33
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Boolean"
-                }
-              }
-            },
-            {
-              "name": "errorMessage",
-              "type": "string | null | undefined",
-              "description": "The error message to display when the input is invalid. If you're using\nPaperInputBehavior to implement your own paper-input-like element,\nbind this to the `<paper-input-error>`'s content, if using.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 102,
-                  "column": 8
-                },
-                "end": {
-                  "line": 102,
-                  "column": 36
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              }
-            },
-            {
-              "name": "charCounter",
-              "type": "boolean | null | undefined",
-              "description": "Set to true to show a character counter.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 106,
-                  "column": 8
-                },
-                "end": {
-                  "line": 106,
-                  "column": 36
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Boolean"
-                }
-              }
-            },
-            {
-              "name": "autoValidate",
-              "type": "boolean | null | undefined",
-              "description": "Set to true to auto-validate the input value. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<paper-input-container>`'s `autoValidate` property.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 112,
-                  "column": 8
-                },
-                "end": {
-                  "line": 112,
-                  "column": 37
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Boolean"
-                }
-              }
-            },
-            {
-              "name": "validator",
-              "type": "string | null | undefined",
-              "description": "Name of the validator to use. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<input is=\"iron-input\">`'s `validator` property.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 118,
-                  "column": 8
-                },
-                "end": {
-                  "line": 118,
-                  "column": 33
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              }
-            },
-            {
-              "name": "autofocus",
-              "type": "boolean | null | undefined",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autofocus`\nproperty.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 124,
-                  "column": 8
-                },
-                "end": {
-                  "line": 124,
-                  "column": 65
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "observer": "\"_autofocusChanged\"",
-                  "attributeType": "Boolean"
-                }
-              }
-            },
-            {
-              "name": "inputmode",
-              "type": "string | null | undefined",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `inputmode`\nproperty.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 130,
-                  "column": 8
-                },
-                "end": {
-                  "line": 130,
-                  "column": 33
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              }
-            },
-            {
-              "name": "minlength",
-              "type": "number | null | undefined",
-              "description": "The minimum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `minlength`\nproperty.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 137,
-                  "column": 8
-                },
-                "end": {
-                  "line": 137,
-                  "column": 33
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Number"
-                }
-              }
-            },
-            {
-              "name": "maxlength",
-              "type": "number | null | undefined",
-              "description": "The maximum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `maxlength`\nproperty.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 144,
-                  "column": 8
-                },
-                "end": {
-                  "line": 144,
-                  "column": 33
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Number"
-                }
-              }
-            },
-            {
-              "name": "name",
-              "type": "string | null | undefined",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `name` property.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 149,
-                  "column": 8
-                },
-                "end": {
-                  "line": 149,
-                  "column": 28
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              }
-            },
-            {
-              "name": "placeholder",
-              "type": "string | null | undefined",
-              "description": "A placeholder string in addition to the label. If this is set, the label\nwill always float.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 154,
-                  "column": 8
-                },
-                "end": {
-                  "line": 158,
-                  "column": 9
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              },
-              "defaultValue": "\"\""
-            },
-            {
-              "name": "readonly",
-              "type": "boolean | null | undefined",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `readonly`\nproperty.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 164,
-                  "column": 8
-                },
-                "end": {
-                  "line": 164,
-                  "column": 33
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Boolean"
-                }
-              }
-            },
-            {
-              "name": "autocapitalize",
-              "type": "string | null | undefined",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocapitalize`\nproperty.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 170,
-                  "column": 8
-                },
-                "end": {
-                  "line": 170,
-                  "column": 53
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              },
-              "defaultValue": "\"none\""
-            },
-            {
-              "name": "autocorrect",
-              "type": "string | null | undefined",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocorrect`\nproperty.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 176,
-                  "column": 8
-                },
-                "end": {
-                  "line": 176,
-                  "column": 49
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              },
-              "defaultValue": "\"off\""
-            },
-            {
-              "name": "autosave",
-              "type": "string | null | undefined",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autosave`\nproperty, used with type=search.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 182,
-                  "column": 8
-                },
-                "end": {
-                  "line": 182,
-                  "column": 32
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              }
-            },
-            {
-              "name": "chips",
-              "type": "Array.<Object>",
-              "description": "A list of chip items to render",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 189,
-                  "column": 8
-                },
-                "end": {
-                  "line": 189,
-                  "column": 28
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Array"
-                }
-              }
-            },
-            {
-              "name": "_value",
-              "type": "string | null | undefined",
-              "description": "Actual paper-input value",
-              "privacy": "protected",
-              "sourceRange": {
-                "start": {
-                  "line": 193,
-                  "column": 8
-                },
-                "end": {
-                  "line": 193,
-                  "column": 30
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "String"
-                }
-              }
-            },
-            {
-              "name": "allowed",
-              "type": "Array.<String>",
-              "description": "List of allowed chips labels. Character case does not matter.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 198,
-                  "column": 8
-                },
-                "end": {
-                  "line": 198,
-                  "column": 30
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Array"
-                }
-              }
-            },
-            {
-              "name": "source",
-              "type": "Object.<(Stirng | Object)>",
-              "description": "List of suggestions to render when the user type in the input field.\n\nEach array item can be a string which will be compared to user input.\nIf the item is an object is must contain the `value` property which\nis used to compare the values. It can also contain `icon` property\nwhich is used to render `<iron-icon>`. It may also contain\n`image` property which is used to pass to `<iron-image>` element.\n\nIf the suggestion item contains `id` property it's value will be returned\nas a value of the input. Otherwise `value` is used.\n\n### Example\n\n```json\n[\n \"item 1\",\n {\n   \"value\": \"Other item\",\n   \"icon\": \"add\"\n },\n {\n   \"value\": \"Image item\",\n   \"image\": \"path/to/image.png\"\n },\n {\n   \"value\": \"Rendered label\",\n   \"id\": \"returned-value\"\n }\n]\n```",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 233,
-                  "column": 8
-                },
-                "end": {
-                  "line": 233,
-                  "column": 29
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "attributeType": "Array"
-                }
-              }
-            }
-          ],
-          "methods": [
-            {
-              "name": "connectedCallback",
-              "description": "",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 244,
-                  "column": 4
-                },
-                "end": {
-                  "line": 250,
-                  "column": 5
-                }
-              },
-              "metadata": {},
-              "params": [],
-              "return": {
-                "type": "void"
-              }
-            },
-            {
-              "name": "validate",
-              "description": "Validates the input element and sets an error style if needed.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 257,
-                  "column": 4
-                },
-                "end": {
-                  "line": 267,
-                  "column": 5
-                }
-              },
-              "metadata": {},
-              "params": [],
-              "return": {
-                "type": "boolean"
-              }
-            },
-            {
-              "name": "_autofocusChanged",
-              "description": "",
-              "privacy": "protected",
-              "sourceRange": {
-                "start": {
-                  "line": 269,
-                  "column": 4
-                },
-                "end": {
-                  "line": 280,
-                  "column": 5
-                }
-              },
-              "metadata": {},
-              "params": [],
-              "return": {
-                "type": "void"
-              }
-            },
-            {
-              "name": "_computeChipRemovable",
-              "description": "Computes value for paper-chip's `removable` property.",
-              "privacy": "protected",
-              "sourceRange": {
-                "start": {
-                  "line": 286,
-                  "column": 4
-                },
-                "end": {
-                  "line": 288,
-                  "column": 5
-                }
-              },
-              "metadata": {},
-              "params": [
-                {
-                  "name": "item",
-                  "type": "Object",
-                  "description": "`chips` list item."
-                }
-              ],
-              "return": {
-                "type": "Boolean"
-              }
-            },
-            {
-              "name": "addChip",
-              "description": "Adds a new chip to the list of chips.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 296,
-                  "column": 4
-                },
-                "end": {
-                  "line": 313,
-                  "column": 5
-                }
-              },
-              "metadata": {},
-              "params": [
-                {
-                  "name": "label",
-                  "type": "String",
-                  "description": "Label of the chip"
-                },
-                {
-                  "name": "removable",
-                  "type": "?Boolean",
-                  "description": "True if the chip can be removed."
-                },
-                {
-                  "name": "icon",
-                  "type": "?String",
-                  "description": "An icon to pass to the chip."
-                },
-                {
-                  "name": "id",
-                  "type": "?String",
-                  "description": "An ID to be used as a value."
-                }
-              ],
-              "return": {
-                "type": "void"
-              }
-            },
-            {
-              "name": "_computeValue",
-              "description": "Computes value of the form input. Produced value is an array of chip\nlabels.",
-              "privacy": "protected",
-              "sourceRange": {
-                "start": {
-                  "line": 319,
-                  "column": 4
-                },
-                "end": {
-                  "line": 330,
-                  "column": 5
-                }
-              },
-              "metadata": {},
-              "params": [
-                {
-                  "name": "record",
-                  "type": "Object",
-                  "description": "Polymer's data change record."
-                }
-              ],
-              "return": {
-                "type": "void"
-              }
-            },
-            {
-              "name": "_computeChipsValues",
-              "description": "Restores chips from passed value.\nWhen input's (this element) value change it computes list of chips",
-              "privacy": "protected",
-              "sourceRange": {
-                "start": {
-                  "line": 337,
-                  "column": 4
-                },
-                "end": {
-                  "line": 369,
-                  "column": 5
-                }
-              },
-              "metadata": {},
-              "params": [
-                {
-                  "name": "value",
-                  "type": "Array.<Object>",
-                  "description": "List of chips definitions"
-                },
-                {
-                  "name": "source",
-                  "type": "Array.<Object>",
-                  "description": "List of suggestions"
-                }
-              ],
-              "return": {
-                "type": "void"
-              }
-            },
-            {
-              "name": "_findSource",
-              "description": "Finsd a suggestion source in the list of suggestions.\nPrimarly it looks for a value (lowercasing it) and then it compares\n`id` if defined.",
-              "privacy": "protected",
-              "sourceRange": {
-                "start": {
-                  "line": 379,
-                  "column": 4
-                },
-                "end": {
-                  "line": 408,
-                  "column": 5
-                }
-              },
-              "metadata": {},
-              "params": [
-                {
-                  "name": "source",
-                  "type": "Array.<(Object | String)>",
-                  "description": "List of suggestions passed to the element"
-                },
-                {
-                  "name": "value",
-                  "type": "String",
-                  "description": "Search value. Should be lowercased before calling this function"
-                },
-                {
-                  "name": "id",
-                  "type": "?String",
-                  "description": "Optional ID to compare."
-                }
-              ],
-              "return": {
-                "type": "(String | Object | undefined)",
-                "desc": "Suggestion source or undefined if not found."
-              }
-            },
-            {
-              "name": "_isAllowed",
-              "description": "Tests if given value is allowed to enter when `allowed` property is set.",
-              "privacy": "protected",
-              "sourceRange": {
-                "start": {
-                  "line": 415,
-                  "column": 4
-                },
-                "end": {
-                  "line": 430,
-                  "column": 5
-                }
-              },
-              "metadata": {},
-              "params": [
-                {
-                  "name": "value",
-                  "type": "String",
-                  "description": "The value to test"
-                },
-                {
-                  "name": "id",
-                  "type": "?String",
-                  "description": "The Suggestion id, if any."
-                }
-              ],
-              "return": {
-                "type": "Boolean",
-                "desc": "True if the value is allowed as a chip label."
-              }
-            },
-            {
-              "name": "_removeChip",
-              "description": "Removes a chip on a specific index.",
-              "privacy": "protected",
-              "sourceRange": {
-                "start": {
-                  "line": 436,
-                  "column": 4
-                },
-                "end": {
-                  "line": 442,
-                  "column": 5
-                }
-              },
-              "metadata": {},
-              "params": [
-                {
-                  "name": "index",
-                  "type": "Number",
-                  "description": "Index of the chip in the `chips` array"
-                }
-              ],
-              "return": {
-                "type": "void"
-              }
-            }
-          ],
-          "staticMethods": [],
-          "demos": [],
-          "metadata": {},
-          "sourceRange": {
-            "start": {
-              "line": 30,
-              "column": 0
-            },
-            "end": {
-              "line": 445,
-              "column": 2
-            }
-          },
-          "privacy": "public",
-          "name": "ArcBehaviors.PaperChipInputMixin",
-          "attributes": [
-            {
-              "name": "label",
-              "description": "The label for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\n`<label>`'s content and `hidden` property, e.g.\n`<label hidden$=\"[[!label]]\">[[label]]</label>` in your `template`",
-              "sourceRange": {
-                "start": {
-                  "line": 48,
-                  "column": 8
-                },
-                "end": {
-                  "line": 48,
-                  "column": 29
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "value",
-              "description": "The value for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<iron-input>`'s `bindValue`\nproperty, or the value property of your input that is `notify:true`.",
-              "sourceRange": {
-                "start": {
-                  "line": 56,
-                  "column": 8
-                },
-                "end": {
-                  "line": 56,
-                  "column": 42
-                }
-              },
-              "metadata": {},
-              "type": "*"
-            },
-            {
-              "name": "disabled",
-              "description": "Set to true to disable this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nboth the `<paper-input-container>`'s and the input's `disabled` property.",
-              "sourceRange": {
-                "start": {
-                  "line": 62,
-                  "column": 8
-                },
-                "end": {
-                  "line": 62,
-                  "column": 33
-                }
-              },
-              "metadata": {},
-              "type": "boolean | null | undefined"
-            },
-            {
-              "name": "invalid",
-              "description": "Returns true if the value is invalid. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to both the\n`<paper-input-container>`'s and the input's `invalid` property.\n\nIf `autoValidate` is true, the `invalid` attribute is managed\nautomatically, which can clobber attempts to manage it manually.",
-              "sourceRange": {
-                "start": {
-                  "line": 71,
-                  "column": 8
-                },
-                "end": {
-                  "line": 71,
-                  "column": 46
-                }
-              },
-              "metadata": {},
-              "type": "boolean | null | undefined"
-            },
-            {
-              "name": "allowed-pattern",
-              "description": "Set this to specify the pattern allowed by `preventInvalidInput`. If\nyou're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `allowedPattern`\nproperty.",
-              "sourceRange": {
-                "start": {
-                  "line": 78,
-                  "column": 8
-                },
-                "end": {
-                  "line": 78,
-                  "column": 38
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "always-float-label",
-              "description": "Set to true to always float the label. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to the\n`<paper-input-container>`'s `alwaysFloatLabel` property.",
-              "sourceRange": {
-                "start": {
-                  "line": 84,
-                  "column": 8
-                },
-                "end": {
-                  "line": 84,
-                  "column": 55
-                }
-              },
-              "metadata": {},
-              "type": "boolean | null | undefined"
-            },
-            {
-              "name": "pattern",
-              "description": "A pattern to validate the `input` with. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `pattern` property.",
-              "sourceRange": {
-                "start": {
-                  "line": 90,
-                  "column": 8
-                },
-                "end": {
-                  "line": 90,
-                  "column": 31
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "required",
-              "description": "Set to true to mark the input as required. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `required` property.",
-              "sourceRange": {
-                "start": {
-                  "line": 96,
-                  "column": 8
-                },
-                "end": {
-                  "line": 96,
-                  "column": 33
-                }
-              },
-              "metadata": {},
-              "type": "boolean | null | undefined"
-            },
-            {
-              "name": "error-message",
-              "description": "The error message to display when the input is invalid. If you're using\nPaperInputBehavior to implement your own paper-input-like element,\nbind this to the `<paper-input-error>`'s content, if using.",
-              "sourceRange": {
-                "start": {
-                  "line": 102,
-                  "column": 8
-                },
-                "end": {
-                  "line": 102,
-                  "column": 36
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "char-counter",
-              "description": "Set to true to show a character counter.",
-              "sourceRange": {
-                "start": {
-                  "line": 106,
-                  "column": 8
-                },
-                "end": {
-                  "line": 106,
-                  "column": 36
-                }
-              },
-              "metadata": {},
-              "type": "boolean | null | undefined"
-            },
-            {
-              "name": "auto-validate",
-              "description": "Set to true to auto-validate the input value. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<paper-input-container>`'s `autoValidate` property.",
-              "sourceRange": {
-                "start": {
-                  "line": 112,
-                  "column": 8
-                },
-                "end": {
-                  "line": 112,
-                  "column": 37
-                }
-              },
-              "metadata": {},
-              "type": "boolean | null | undefined"
-            },
-            {
-              "name": "validator",
-              "description": "Name of the validator to use. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<input is=\"iron-input\">`'s `validator` property.",
-              "sourceRange": {
-                "start": {
-                  "line": 118,
-                  "column": 8
-                },
-                "end": {
-                  "line": 118,
-                  "column": 33
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "autofocus",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autofocus`\nproperty.",
-              "sourceRange": {
-                "start": {
-                  "line": 124,
-                  "column": 8
-                },
-                "end": {
-                  "line": 124,
-                  "column": 65
-                }
-              },
-              "metadata": {},
-              "type": "boolean | null | undefined"
-            },
-            {
-              "name": "inputmode",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `inputmode`\nproperty.",
-              "sourceRange": {
-                "start": {
-                  "line": 130,
-                  "column": 8
-                },
-                "end": {
-                  "line": 130,
-                  "column": 33
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "minlength",
-              "description": "The minimum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `minlength`\nproperty.",
-              "sourceRange": {
-                "start": {
-                  "line": 137,
-                  "column": 8
-                },
-                "end": {
-                  "line": 137,
-                  "column": 33
-                }
-              },
-              "metadata": {},
-              "type": "number | null | undefined"
-            },
-            {
-              "name": "maxlength",
-              "description": "The maximum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `maxlength`\nproperty.",
-              "sourceRange": {
-                "start": {
-                  "line": 144,
-                  "column": 8
-                },
-                "end": {
-                  "line": 144,
-                  "column": 33
-                }
-              },
-              "metadata": {},
-              "type": "number | null | undefined"
-            },
-            {
-              "name": "name",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `name` property.",
-              "sourceRange": {
-                "start": {
-                  "line": 149,
-                  "column": 8
-                },
-                "end": {
-                  "line": 149,
-                  "column": 28
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "placeholder",
-              "description": "A placeholder string in addition to the label. If this is set, the label\nwill always float.",
-              "sourceRange": {
-                "start": {
-                  "line": 154,
-                  "column": 8
-                },
-                "end": {
-                  "line": 158,
-                  "column": 9
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "readonly",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `readonly`\nproperty.",
-              "sourceRange": {
-                "start": {
-                  "line": 164,
-                  "column": 8
-                },
-                "end": {
-                  "line": 164,
-                  "column": 33
-                }
-              },
-              "metadata": {},
-              "type": "boolean | null | undefined"
-            },
-            {
-              "name": "autocapitalize",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocapitalize`\nproperty.",
-              "sourceRange": {
-                "start": {
-                  "line": 170,
-                  "column": 8
-                },
-                "end": {
-                  "line": 170,
-                  "column": 53
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "autocorrect",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocorrect`\nproperty.",
-              "sourceRange": {
-                "start": {
-                  "line": 176,
-                  "column": 8
-                },
-                "end": {
-                  "line": 176,
-                  "column": 49
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "autosave",
-              "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autosave`\nproperty, used with type=search.",
-              "sourceRange": {
-                "start": {
-                  "line": 182,
-                  "column": 8
-                },
-                "end": {
-                  "line": 182,
-                  "column": 32
-                }
-              },
-              "metadata": {},
-              "type": "string | null | undefined"
-            },
-            {
-              "name": "chips",
-              "description": "A list of chip items to render",
-              "sourceRange": {
-                "start": {
-                  "line": 189,
-                  "column": 8
-                },
-                "end": {
-                  "line": 189,
-                  "column": 28
-                }
-              },
-              "metadata": {},
-              "type": "Array.<Object>"
-            },
-            {
-              "name": "allowed",
-              "description": "List of allowed chips labels. Character case does not matter.",
-              "sourceRange": {
-                "start": {
-                  "line": 198,
-                  "column": 8
-                },
-                "end": {
-                  "line": 198,
-                  "column": 30
-                }
-              },
-              "metadata": {},
-              "type": "Array.<String>"
-            },
-            {
-              "name": "source",
-              "description": "List of suggestions to render when the user type in the input field.\n\nEach array item can be a string which will be compared to user input.\nIf the item is an object is must contain the `value` property which\nis used to compare the values. It can also contain `icon` property\nwhich is used to render `<iron-icon>`. It may also contain\n`image` property which is used to pass to `<iron-image>` element.\n\nIf the suggestion item contains `id` property it's value will be returned\nas a value of the input. Otherwise `value` is used.\n\n### Example\n\n```json\n[\n \"item 1\",\n {\n   \"value\": \"Other item\",\n   \"icon\": \"add\"\n },\n {\n   \"value\": \"Image item\",\n   \"image\": \"path/to/image.png\"\n },\n {\n   \"value\": \"Rendered label\",\n   \"id\": \"returned-value\"\n }\n]\n```",
-              "sourceRange": {
-                "start": {
-                  "line": 233,
-                  "column": 8
-                },
-                "end": {
-                  "line": 233,
-                  "column": 29
-                }
-              },
-              "metadata": {},
-              "type": "Object.<(Stirng | Object)>"
-            }
-          ],
-          "events": [],
-          "styling": {
-            "cssVariables": [],
-            "selectors": []
-          },
-          "slots": []
-        }
-      ]
-    }
-  ],
   "elements": [
     {
-      "description": "An autocomplete element for `paper-chip-input`.\nIt is a lightweigth version of `paper-autocomplete` element.\n\n### Styling\n\n## Styling\n\n`<paper-chip-autocomplete>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--paper-chip-autocomplete` | Mixin applied to this elment | `{}`\n`--paper-chip-autocomplete-background-color` | Background color of the element. | `inherit`",
+      "description": "An autocomplete element for `paper-chip-input`.\nIt is a lightweigth version of `paper-autocomplete` element.\n\n### Styling\n\n## Styling\n\n`<paper-chip-autocomplete>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--paper-chip-autocomplete-background-color` | Background color of the element. | `inherit`",
       "summary": "",
-      "path": "paper-chip-autocomplete.html",
+      "path": "paper-chip-autocomplete.js",
       "properties": [
         {
           "name": "source",
@@ -1318,12 +13,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 110,
-              "column": 8
+              "line": 114,
+              "column": 6
             },
             "end": {
-              "line": 110,
-              "column": 29
+              "line": 114,
+              "column": 27
             }
           },
           "metadata": {
@@ -1339,12 +34,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 114,
-              "column": 8
+              "line": 118,
+              "column": 6
             },
             "end": {
-              "line": 114,
-              "column": 21
+              "line": 118,
+              "column": 19
             }
           },
           "metadata": {
@@ -1360,12 +55,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 119,
-              "column": 8
+              "line": 123,
+              "column": 6
             },
             "end": {
-              "line": 122,
-              "column": 9
+              "line": 126,
+              "column": 7
             }
           },
           "metadata": {
@@ -1382,12 +77,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 126,
-              "column": 8
+              "line": 130,
+              "column": 6
             },
             "end": {
-              "line": 130,
-              "column": 9
+              "line": 134,
+              "column": 7
             }
           },
           "metadata": {
@@ -1405,12 +100,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 135,
-              "column": 8
+              "line": 139,
+              "column": 6
             },
             "end": {
-              "line": 140,
-              "column": 9
+              "line": 144,
+              "column": 7
             }
           },
           "metadata": {
@@ -1426,12 +121,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 146,
-              "column": 8
+              "line": 150,
+              "column": 6
             },
             "end": {
-              "line": 151,
-              "column": 9
+              "line": 155,
+              "column": 7
             }
           },
           "metadata": {
@@ -1447,12 +142,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 157,
-              "column": 8
+              "line": 161,
+              "column": 6
             },
             "end": {
-              "line": 157,
-              "column": 27
+              "line": 161,
+              "column": 25
             }
           },
           "metadata": {
@@ -1468,12 +163,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 162,
-              "column": 8
+              "line": 166,
+              "column": 6
             },
             "end": {
-              "line": 165,
-              "column": 9
+              "line": 169,
+              "column": 7
             }
           },
           "metadata": {
@@ -1491,12 +186,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 169,
-              "column": 4
+              "line": 173,
+              "column": 2
             },
             "end": {
-              "line": 196,
-              "column": 5
+              "line": 200,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1515,12 +210,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 202,
-              "column": 4
+              "line": 206,
+              "column": 2
             },
             "end": {
-              "line": 204,
-              "column": 5
+              "line": 208,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1541,12 +236,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 210,
-              "column": 4
+              "line": 214,
+              "column": 2
             },
             "end": {
-              "line": 216,
-              "column": 5
+              "line": 220,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1566,12 +261,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 221,
-              "column": 4
+              "line": 225,
+              "column": 2
             },
             "end": {
-              "line": 231,
-              "column": 5
+              "line": 235,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1586,12 +281,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 235,
-              "column": 4
+              "line": 239,
+              "column": 2
             },
             "end": {
-              "line": 245,
-              "column": 5
+              "line": 249,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1606,12 +301,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 250,
-              "column": 4
+              "line": 254,
+              "column": 2
             },
             "end": {
-              "line": 258,
-              "column": 5
+              "line": 262,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1626,12 +321,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 263,
-              "column": 4
+              "line": 267,
+              "column": 2
             },
             "end": {
-              "line": 272,
-              "column": 5
+              "line": 276,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1652,12 +347,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 284,
-              "column": 4
+              "line": 288,
+              "column": 2
             },
             "end": {
-              "line": 312,
-              "column": 5
+              "line": 316,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1678,12 +373,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 314,
-              "column": 4
+              "line": 318,
+              "column": 2
             },
             "end": {
-              "line": 317,
-              "column": 5
+              "line": 321,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1707,12 +402,12 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 75,
-          "column": 2
+          "line": 47,
+          "column": 0
         },
         "end": {
-          "line": 325,
-          "column": 3
+          "line": 329,
+          "column": 1
         }
       },
       "privacy": "public",
@@ -1724,12 +419,12 @@
           "description": "List of suggestions to render when the user type in the input field.\n\nEach array item can be a string which will be compared to user input.\nIf the item is an object is must contain the `value` property which\nis used to compare the values. It can also contain `icon` property\nwhich is used to render `<iron-icon>`. It may also contain\n`image` property which is used to pass to `<iron-image>` element.\n\n### Example\n\n```json\n[\n \"item 1\",\n {\n   \"value\": \"Other item\",\n   \"icon\": \"add\"\n },\n {\n   \"value\": \"Image item\",\n   \"image\": \"path/to/image.png\"\n }\n]\n```",
           "sourceRange": {
             "start": {
-              "line": 110,
-              "column": 8
+              "line": 114,
+              "column": 6
             },
             "end": {
-              "line": 110,
-              "column": 29
+              "line": 114,
+              "column": 27
             }
           },
           "metadata": {},
@@ -1740,12 +435,12 @@
           "description": "The value of the input field connected to this autocomplete",
           "sourceRange": {
             "start": {
-              "line": 114,
-              "column": 8
+              "line": 118,
+              "column": 6
             },
             "end": {
-              "line": 114,
-              "column": 21
+              "line": 118,
+              "column": 19
             }
           },
           "metadata": {},
@@ -1756,12 +451,12 @@
           "description": "Application's / parent element's scroll target element.",
           "sourceRange": {
             "start": {
-              "line": 135,
-              "column": 8
+              "line": 139,
+              "column": 6
             },
             "end": {
-              "line": 140,
-              "column": 9
+              "line": 144,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1772,12 +467,12 @@
           "description": "Sizing target element. It is used to compute the size of the\nautocomplete container.",
           "sourceRange": {
             "start": {
-              "line": 146,
-              "column": 8
+              "line": 150,
+              "column": 6
             },
             "end": {
-              "line": 151,
-              "column": 9
+              "line": 155,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1788,12 +483,12 @@
           "description": "The input element used to input value.\nIt is used to observe keys pressed",
           "sourceRange": {
             "start": {
-              "line": 157,
-              "column": 8
+              "line": 161,
+              "column": 6
             },
             "end": {
-              "line": 157,
-              "column": 27
+              "line": 161,
+              "column": 25
             }
           },
           "metadata": {},
@@ -1804,12 +499,12 @@
           "description": "Currently selected item on a suggestions list.",
           "sourceRange": {
             "start": {
-              "line": 162,
-              "column": 8
+              "line": 166,
+              "column": 6
             },
             "end": {
-              "line": 165,
-              "column": 9
+              "line": 169,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1836,9 +531,9 @@
       ]
     },
     {
-      "description": "`paper-chip-input`\n\nA material design input with material design chips.\n\nIt renders chips on the left hand side of the input. It is added as an\nadd-on of the `paper-input` element.\n\nIt allows to provide list of suggestions that are rendered is user input\nallows to render suggestions.\n\n## Example\n\n```html\n<paper-chip-input\n label=\"List your favourite fruits\"\n required\n auto-validate\n name=\"fruits\"\n allowed='[\"apple\",\"Orange\",\"BANANA\"]'\n source='[\"Apple\", \"Apricot\", 'Banana',\"Orange\"]'\n pattern=\"[a-zA-Z]+\"\n error-message=\"This is not a fruit name!\"></paper-chip-input>\n```\n\n## Styling\n\n`<paper-chip-input>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--paper-chip-input` | Mixin applied to this elment | `{}`\n\nUse `paper-input` and `paper-chip` styles to style the element.",
+      "description": "`paper-chip-input`\n\nA material design input with material design chips.\n\nIt renders chips on the left hand side of the input. It is added as an\nadd-on of the `paper-input` element.\n\nIt allows to provide list of suggestions that are rendered is user input\nallows to render suggestions.\n\n## Example\n\n```html\n<paper-chip-input\n label=\"List your favourite fruits\"\n required\n auto-validate\n name=\"fruits\"\n allowed='[\"apple\",\"Orange\",\"BANANA\"]'\n source='[\"Apple\", \"Apricot\", 'Banana',\"Orange\"]'\n pattern=\"[a-zA-Z]+\"\n error-message=\"This is not a fruit name!\"></paper-chip-input>\n```\n\n## Styling\n\n`<paper-chip-input>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n\nUse `paper-input` and `paper-chip` styles to style the element.",
       "summary": "",
-      "path": "paper-chip-input.html",
+      "path": "paper-chip-input.js",
       "properties": [
         {
           "name": "_inputElement",
@@ -1846,13 +541,13 @@
           "description": "A paper input element.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 41,
+              "line": 32,
               "column": 8
             },
             "end": {
-              "line": 41,
+              "line": 32,
               "column": 29
             }
           },
@@ -1869,13 +564,13 @@
           "description": "The label for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\n`<label>`'s content and `hidden` property, e.g.\n`<label hidden$=\"[[!label]]\">[[label]]</label>` in your `template`",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 48,
+              "line": 39,
               "column": 8
             },
             "end": {
-              "line": 48,
+              "line": 39,
               "column": 29
             }
           },
@@ -1892,13 +587,13 @@
           "description": "The value for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<iron-input>`'s `bindValue`\nproperty, or the value property of your input that is `notify:true`.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 56,
+              "line": 47,
               "column": 8
             },
             "end": {
-              "line": 56,
+              "line": 47,
               "column": 42
             }
           },
@@ -1916,13 +611,13 @@
           "description": "Set to true to disable this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nboth the `<paper-input-container>`'s and the input's `disabled` property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 62,
+              "line": 53,
               "column": 8
             },
             "end": {
-              "line": 62,
+              "line": 53,
               "column": 33
             }
           },
@@ -1939,13 +634,13 @@
           "description": "Returns true if the value is invalid. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to both the\n`<paper-input-container>`'s and the input's `invalid` property.\n\nIf `autoValidate` is true, the `invalid` attribute is managed\nautomatically, which can clobber attempts to manage it manually.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 71,
+              "line": 62,
               "column": 8
             },
             "end": {
-              "line": 71,
+              "line": 62,
               "column": 46
             }
           },
@@ -1963,13 +658,13 @@
           "description": "Set this to specify the pattern allowed by `preventInvalidInput`. If\nyou're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `allowedPattern`\nproperty.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 78,
+              "line": 69,
               "column": 8
             },
             "end": {
-              "line": 78,
+              "line": 69,
               "column": 38
             }
           },
@@ -1986,13 +681,13 @@
           "description": "Set to true to always float the label. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to the\n`<paper-input-container>`'s `alwaysFloatLabel` property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 84,
+              "line": 75,
               "column": 8
             },
             "end": {
-              "line": 84,
+              "line": 75,
               "column": 55
             }
           },
@@ -2010,13 +705,13 @@
           "description": "A pattern to validate the `input` with. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `pattern` property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 90,
+              "line": 81,
               "column": 8
             },
             "end": {
-              "line": 90,
+              "line": 81,
               "column": 31
             }
           },
@@ -2033,13 +728,13 @@
           "description": "Set to true to mark the input as required. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `required` property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 96,
+              "line": 87,
               "column": 8
             },
             "end": {
-              "line": 96,
+              "line": 87,
               "column": 33
             }
           },
@@ -2056,13 +751,13 @@
           "description": "The error message to display when the input is invalid. If you're using\nPaperInputBehavior to implement your own paper-input-like element,\nbind this to the `<paper-input-error>`'s content, if using.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 102,
+              "line": 93,
               "column": 8
             },
             "end": {
-              "line": 102,
+              "line": 93,
               "column": 36
             }
           },
@@ -2079,13 +774,13 @@
           "description": "Set to true to show a character counter.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 106,
+              "line": 97,
               "column": 8
             },
             "end": {
-              "line": 106,
+              "line": 97,
               "column": 36
             }
           },
@@ -2102,13 +797,13 @@
           "description": "Set to true to auto-validate the input value. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<paper-input-container>`'s `autoValidate` property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 112,
+              "line": 103,
               "column": 8
             },
             "end": {
-              "line": 112,
+              "line": 103,
               "column": 37
             }
           },
@@ -2125,13 +820,13 @@
           "description": "Name of the validator to use. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<input is=\"iron-input\">`'s `validator` property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 118,
+              "line": 109,
               "column": 8
             },
             "end": {
-              "line": 118,
+              "line": 109,
               "column": 33
             }
           },
@@ -2148,13 +843,13 @@
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autofocus`\nproperty.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 124,
+              "line": 115,
               "column": 8
             },
             "end": {
-              "line": 124,
+              "line": 115,
               "column": 65
             }
           },
@@ -2172,13 +867,13 @@
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `inputmode`\nproperty.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 130,
+              "line": 121,
               "column": 8
             },
             "end": {
-              "line": 130,
+              "line": 121,
               "column": 33
             }
           },
@@ -2195,13 +890,13 @@
           "description": "The minimum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `minlength`\nproperty.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 137,
+              "line": 128,
               "column": 8
             },
             "end": {
-              "line": 137,
+              "line": 128,
               "column": 33
             }
           },
@@ -2218,13 +913,13 @@
           "description": "The maximum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `maxlength`\nproperty.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 144,
+              "line": 135,
               "column": 8
             },
             "end": {
-              "line": 144,
+              "line": 135,
               "column": 33
             }
           },
@@ -2241,13 +936,13 @@
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `name` property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 149,
+              "line": 140,
               "column": 8
             },
             "end": {
-              "line": 149,
+              "line": 140,
               "column": 28
             }
           },
@@ -2264,13 +959,13 @@
           "description": "A placeholder string in addition to the label. If this is set, the label\nwill always float.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 154,
+              "line": 145,
               "column": 8
             },
             "end": {
-              "line": 158,
+              "line": 149,
               "column": 9
             }
           },
@@ -2288,13 +983,13 @@
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `readonly`\nproperty.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 164,
+              "line": 155,
               "column": 8
             },
             "end": {
-              "line": 164,
+              "line": 155,
               "column": 33
             }
           },
@@ -2311,13 +1006,13 @@
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocapitalize`\nproperty.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 170,
+              "line": 161,
               "column": 8
             },
             "end": {
-              "line": 170,
+              "line": 161,
               "column": 53
             }
           },
@@ -2335,13 +1030,13 @@
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocorrect`\nproperty.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 176,
+              "line": 167,
               "column": 8
             },
             "end": {
-              "line": 176,
+              "line": 167,
               "column": 49
             }
           },
@@ -2359,13 +1054,13 @@
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autosave`\nproperty, used with type=search.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 182,
+              "line": 173,
               "column": 8
             },
             "end": {
-              "line": 182,
+              "line": 173,
               "column": 32
             }
           },
@@ -2382,13 +1077,13 @@
           "description": "A list of chip items to render",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 189,
+              "line": 180,
               "column": 8
             },
             "end": {
-              "line": 189,
+              "line": 180,
               "column": 28
             }
           },
@@ -2405,13 +1100,13 @@
           "description": "Actual paper-input value",
           "privacy": "protected",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 193,
+              "line": 184,
               "column": 8
             },
             "end": {
-              "line": 193,
+              "line": 184,
               "column": 30
             }
           },
@@ -2428,13 +1123,13 @@
           "description": "List of allowed chips labels. Character case does not matter.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 198,
+              "line": 189,
               "column": 8
             },
             "end": {
-              "line": 198,
+              "line": 189,
               "column": 30
             }
           },
@@ -2451,13 +1146,13 @@
           "description": "List of suggestions to render when the user type in the input field.\n\nEach array item can be a string which will be compared to user input.\nIf the item is an object is must contain the `value` property which\nis used to compare the values. It can also contain `icon` property\nwhich is used to render `<iron-icon>`. It may also contain\n`image` property which is used to pass to `<iron-image>` element.\n\nIf the suggestion item contains `id` property it's value will be returned\nas a value of the input. Otherwise `value` is used.\n\n### Example\n\n```json\n[\n \"item 1\",\n {\n   \"value\": \"Other item\",\n   \"icon\": \"add\"\n },\n {\n   \"value\": \"Image item\",\n   \"image\": \"path/to/image.png\"\n },\n {\n   \"value\": \"Rendered label\",\n   \"id\": \"returned-value\"\n }\n]\n```",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 233,
+              "line": 224,
               "column": 8
             },
             "end": {
-              "line": 233,
+              "line": 224,
               "column": 29
             }
           },
@@ -2475,12 +1170,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 132,
-              "column": 8
+              "line": 154,
+              "column": 6
             },
             "end": {
-              "line": 132,
-              "column": 35
+              "line": 154,
+              "column": 33
             }
           },
           "metadata": {
@@ -2496,12 +1191,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 137,
-              "column": 8
+              "line": 159,
+              "column": 6
             },
             "end": {
-              "line": 137,
-              "column": 31
+              "line": 159,
+              "column": 29
             }
           },
           "metadata": {
@@ -2517,12 +1212,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 145,
-              "column": 8
+              "line": 167,
+              "column": 6
             },
             "end": {
-              "line": 145,
-              "column": 30
+              "line": 167,
+              "column": 28
             }
           },
           "metadata": {
@@ -2539,12 +1234,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 149,
-              "column": 4
+              "line": 171,
+              "column": 2
             },
             "end": {
-              "line": 152,
-              "column": 5
+              "line": 174,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2558,13 +1253,13 @@
           "description": "Validates the input element and sets an error style if needed.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 257,
+              "line": 248,
               "column": 4
             },
             "end": {
-              "line": 267,
+              "line": 258,
               "column": 5
             }
           },
@@ -2580,13 +1275,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 269,
+              "line": 260,
               "column": 4
             },
             "end": {
-              "line": 280,
+              "line": 271,
               "column": 5
             }
           },
@@ -2602,13 +1297,13 @@
           "description": "Computes value for paper-chip's `removable` property.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 286,
+              "line": 277,
               "column": 4
             },
             "end": {
-              "line": 288,
+              "line": 279,
               "column": 5
             }
           },
@@ -2630,13 +1325,13 @@
           "description": "Adds a new chip to the list of chips.",
           "privacy": "public",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 296,
+              "line": 287,
               "column": 4
             },
             "end": {
-              "line": 313,
+              "line": 304,
               "column": 5
             }
           },
@@ -2673,13 +1368,13 @@
           "description": "Computes value of the form input. Produced value is an array of chip\nlabels.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 319,
+              "line": 310,
               "column": 4
             },
             "end": {
-              "line": 330,
+              "line": 321,
               "column": 5
             }
           },
@@ -2701,13 +1396,13 @@
           "description": "Restores chips from passed value.\nWhen input's (this element) value change it computes list of chips",
           "privacy": "protected",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 337,
+              "line": 328,
               "column": 4
             },
             "end": {
-              "line": 369,
+              "line": 360,
               "column": 5
             }
           },
@@ -2734,13 +1429,13 @@
           "description": "Finsd a suggestion source in the list of suggestions.\nPrimarly it looks for a value (lowercasing it) and then it compares\n`id` if defined.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 379,
+              "line": 370,
               "column": 4
             },
             "end": {
-              "line": 408,
+              "line": 399,
               "column": 5
             }
           },
@@ -2773,13 +1468,13 @@
           "description": "Tests if given value is allowed to enter when `allowed` property is set.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 415,
+              "line": 406,
               "column": 4
             },
             "end": {
-              "line": 430,
+              "line": 421,
               "column": 5
             }
           },
@@ -2807,13 +1502,13 @@
           "description": "Removes a chip on a specific index.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 436,
+              "line": 427,
               "column": 4
             },
             "end": {
-              "line": 442,
+              "line": 433,
               "column": 5
             }
           },
@@ -2836,12 +1531,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 157,
-              "column": 4
+              "line": 179,
+              "column": 2
             },
             "end": {
-              "line": 174,
-              "column": 5
+              "line": 196,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2856,12 +1551,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 178,
-              "column": 4
+              "line": 200,
+              "column": 2
             },
             "end": {
-              "line": 198,
-              "column": 5
+              "line": 220,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2876,12 +1571,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 203,
-              "column": 4
+              "line": 225,
+              "column": 2
             },
             "end": {
-              "line": 206,
-              "column": 5
+              "line": 228,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2901,12 +1596,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 211,
-              "column": 4
+              "line": 233,
+              "column": 2
             },
             "end": {
-              "line": 218,
-              "column": 5
+              "line": 240,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2926,12 +1621,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 226,
-              "column": 4
+              "line": 248,
+              "column": 2
             },
             "end": {
-              "line": 231,
-              "column": 5
+              "line": 253,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2951,12 +1646,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 233,
-              "column": 4
+              "line": 255,
+              "column": 2
             },
             "end": {
-              "line": 244,
-              "column": 5
+              "line": 266,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2976,12 +1671,12 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 121,
-          "column": 2
+          "line": 65,
+          "column": 0
         },
         "end": {
-          "line": 245,
-          "column": 3
+          "line": 267,
+          "column": 1
         }
       },
       "privacy": "public",
@@ -2992,13 +1687,13 @@
           "name": "label",
           "description": "The label for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\n`<label>`'s content and `hidden` property, e.g.\n`<label hidden$=\"[[!label]]\">[[label]]</label>` in your `template`",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 48,
+              "line": 39,
               "column": 8
             },
             "end": {
-              "line": 48,
+              "line": 39,
               "column": 29
             }
           },
@@ -3010,13 +1705,13 @@
           "name": "value",
           "description": "The value for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<iron-input>`'s `bindValue`\nproperty, or the value property of your input that is `notify:true`.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 56,
+              "line": 47,
               "column": 8
             },
             "end": {
-              "line": 56,
+              "line": 47,
               "column": 42
             }
           },
@@ -3028,13 +1723,13 @@
           "name": "disabled",
           "description": "Set to true to disable this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nboth the `<paper-input-container>`'s and the input's `disabled` property.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 62,
+              "line": 53,
               "column": 8
             },
             "end": {
-              "line": 62,
+              "line": 53,
               "column": 33
             }
           },
@@ -3046,13 +1741,13 @@
           "name": "invalid",
           "description": "Returns true if the value is invalid. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to both the\n`<paper-input-container>`'s and the input's `invalid` property.\n\nIf `autoValidate` is true, the `invalid` attribute is managed\nautomatically, which can clobber attempts to manage it manually.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 71,
+              "line": 62,
               "column": 8
             },
             "end": {
-              "line": 71,
+              "line": 62,
               "column": 46
             }
           },
@@ -3064,13 +1759,13 @@
           "name": "allowed-pattern",
           "description": "Set this to specify the pattern allowed by `preventInvalidInput`. If\nyou're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `allowedPattern`\nproperty.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 78,
+              "line": 69,
               "column": 8
             },
             "end": {
-              "line": 78,
+              "line": 69,
               "column": 38
             }
           },
@@ -3082,13 +1777,13 @@
           "name": "always-float-label",
           "description": "Set to true to always float the label. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to the\n`<paper-input-container>`'s `alwaysFloatLabel` property.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 84,
+              "line": 75,
               "column": 8
             },
             "end": {
-              "line": 84,
+              "line": 75,
               "column": 55
             }
           },
@@ -3100,13 +1795,13 @@
           "name": "pattern",
           "description": "A pattern to validate the `input` with. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `pattern` property.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 90,
+              "line": 81,
               "column": 8
             },
             "end": {
-              "line": 90,
+              "line": 81,
               "column": 31
             }
           },
@@ -3118,13 +1813,13 @@
           "name": "required",
           "description": "Set to true to mark the input as required. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `required` property.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 96,
+              "line": 87,
               "column": 8
             },
             "end": {
-              "line": 96,
+              "line": 87,
               "column": 33
             }
           },
@@ -3136,13 +1831,13 @@
           "name": "error-message",
           "description": "The error message to display when the input is invalid. If you're using\nPaperInputBehavior to implement your own paper-input-like element,\nbind this to the `<paper-input-error>`'s content, if using.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 102,
+              "line": 93,
               "column": 8
             },
             "end": {
-              "line": 102,
+              "line": 93,
               "column": 36
             }
           },
@@ -3154,13 +1849,13 @@
           "name": "char-counter",
           "description": "Set to true to show a character counter.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 106,
+              "line": 97,
               "column": 8
             },
             "end": {
-              "line": 106,
+              "line": 97,
               "column": 36
             }
           },
@@ -3172,13 +1867,13 @@
           "name": "auto-validate",
           "description": "Set to true to auto-validate the input value. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<paper-input-container>`'s `autoValidate` property.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 112,
+              "line": 103,
               "column": 8
             },
             "end": {
-              "line": 112,
+              "line": 103,
               "column": 37
             }
           },
@@ -3190,13 +1885,13 @@
           "name": "validator",
           "description": "Name of the validator to use. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<input is=\"iron-input\">`'s `validator` property.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 118,
+              "line": 109,
               "column": 8
             },
             "end": {
-              "line": 118,
+              "line": 109,
               "column": 33
             }
           },
@@ -3208,13 +1903,13 @@
           "name": "autofocus",
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autofocus`\nproperty.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 124,
+              "line": 115,
               "column": 8
             },
             "end": {
-              "line": 124,
+              "line": 115,
               "column": 65
             }
           },
@@ -3226,13 +1921,13 @@
           "name": "inputmode",
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `inputmode`\nproperty.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 130,
+              "line": 121,
               "column": 8
             },
             "end": {
-              "line": 130,
+              "line": 121,
               "column": 33
             }
           },
@@ -3244,13 +1939,13 @@
           "name": "minlength",
           "description": "The minimum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `minlength`\nproperty.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 137,
+              "line": 128,
               "column": 8
             },
             "end": {
-              "line": 137,
+              "line": 128,
               "column": 33
             }
           },
@@ -3262,13 +1957,13 @@
           "name": "maxlength",
           "description": "The maximum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `maxlength`\nproperty.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 144,
+              "line": 135,
               "column": 8
             },
             "end": {
-              "line": 144,
+              "line": 135,
               "column": 33
             }
           },
@@ -3280,13 +1975,13 @@
           "name": "name",
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `name` property.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 149,
+              "line": 140,
               "column": 8
             },
             "end": {
-              "line": 149,
+              "line": 140,
               "column": 28
             }
           },
@@ -3298,13 +1993,13 @@
           "name": "placeholder",
           "description": "A placeholder string in addition to the label. If this is set, the label\nwill always float.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 154,
+              "line": 145,
               "column": 8
             },
             "end": {
-              "line": 158,
+              "line": 149,
               "column": 9
             }
           },
@@ -3316,13 +2011,13 @@
           "name": "readonly",
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `readonly`\nproperty.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 164,
+              "line": 155,
               "column": 8
             },
             "end": {
-              "line": 164,
+              "line": 155,
               "column": 33
             }
           },
@@ -3334,13 +2029,13 @@
           "name": "autocapitalize",
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocapitalize`\nproperty.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 170,
+              "line": 161,
               "column": 8
             },
             "end": {
-              "line": 170,
+              "line": 161,
               "column": 53
             }
           },
@@ -3352,13 +2047,13 @@
           "name": "autocorrect",
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocorrect`\nproperty.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 176,
+              "line": 167,
               "column": 8
             },
             "end": {
-              "line": 176,
+              "line": 167,
               "column": 49
             }
           },
@@ -3370,13 +2065,13 @@
           "name": "autosave",
           "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autosave`\nproperty, used with type=search.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 182,
+              "line": 173,
               "column": 8
             },
             "end": {
-              "line": 182,
+              "line": 173,
               "column": 32
             }
           },
@@ -3388,13 +2083,13 @@
           "name": "chips",
           "description": "A list of chip items to render",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 189,
+              "line": 180,
               "column": 8
             },
             "end": {
-              "line": 189,
+              "line": 180,
               "column": 28
             }
           },
@@ -3406,13 +2101,13 @@
           "name": "allowed",
           "description": "List of allowed chips labels. Character case does not matter.",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 198,
+              "line": 189,
               "column": 8
             },
             "end": {
-              "line": 198,
+              "line": 189,
               "column": 30
             }
           },
@@ -3424,13 +2119,13 @@
           "name": "source",
           "description": "List of suggestions to render when the user type in the input field.\n\nEach array item can be a string which will be compared to user input.\nIf the item is an object is must contain the `value` property which\nis used to compare the values. It can also contain `icon` property\nwhich is used to render `<iron-icon>`. It may also contain\n`image` property which is used to pass to `<iron-image>` element.\n\nIf the suggestion item contains `id` property it's value will be returned\nas a value of the input. Otherwise `value` is used.\n\n### Example\n\n```json\n[\n \"item 1\",\n {\n   \"value\": \"Other item\",\n   \"icon\": \"add\"\n },\n {\n   \"value\": \"Image item\",\n   \"image\": \"path/to/image.png\"\n },\n {\n   \"value\": \"Rendered label\",\n   \"id\": \"returned-value\"\n }\n]\n```",
           "sourceRange": {
-            "file": "paper-chip-input-mixin.html",
+            "file": "paper-chip-input-mixin.js",
             "start": {
-              "line": 233,
+              "line": 224,
               "column": 8
             },
             "end": {
-              "line": 233,
+              "line": 224,
               "column": 29
             }
           },
@@ -3443,12 +2138,12 @@
           "description": "A name of the icon to render on the chip when `removable` property\nis set.\nBy default it referes to Polymer's default icons library, to the\n`clear` icon. You must include this library into your document.\nYou can also use whatever other icons library.",
           "sourceRange": {
             "start": {
-              "line": 145,
-              "column": 8
+              "line": 167,
+              "column": 6
             },
             "end": {
-              "line": 145,
-              "column": 30
+              "line": 167,
+              "column": 28
             }
           },
           "metadata": {},
@@ -3463,8 +2158,1295 @@
       "slots": [],
       "tagname": "paper-chip-input",
       "mixins": [
-        "ArcBehaviors.PaperChipInputMixin"
+        "PaperChipInputMixin"
       ]
+    }
+  ],
+  "mixins": [
+    {
+      "description": "A behavior to be implemented with inputs that uses `paper-chips`.",
+      "summary": "",
+      "path": "paper-chip-input-mixin.js",
+      "properties": [
+        {
+          "name": "_inputElement",
+          "type": "Object | null | undefined",
+          "description": "A paper input element.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 32,
+              "column": 8
+            },
+            "end": {
+              "line": 32,
+              "column": 29
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Object"
+            }
+          }
+        },
+        {
+          "name": "label",
+          "type": "string | null | undefined",
+          "description": "The label for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\n`<label>`'s content and `hidden` property, e.g.\n`<label hidden$=\"[[!label]]\">[[label]]</label>` in your `template`",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 39,
+              "column": 8
+            },
+            "end": {
+              "line": 39,
+              "column": 29
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "value",
+          "type": "*",
+          "description": "The value for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<iron-input>`'s `bindValue`\nproperty, or the value property of your input that is `notify:true`.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 47,
+              "column": 8
+            },
+            "end": {
+              "line": 47,
+              "column": 42
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "attributeType": "Array"
+            }
+          }
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | null | undefined",
+          "description": "Set to true to disable this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nboth the `<paper-input-container>`'s and the input's `disabled` property.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 53,
+              "column": 8
+            },
+            "end": {
+              "line": 53,
+              "column": 33
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          }
+        },
+        {
+          "name": "invalid",
+          "type": "boolean | null | undefined",
+          "description": "Returns true if the value is invalid. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to both the\n`<paper-input-container>`'s and the input's `invalid` property.\n\nIf `autoValidate` is true, the `invalid` attribute is managed\nautomatically, which can clobber attempts to manage it manually.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 62,
+              "column": 8
+            },
+            "end": {
+              "line": 62,
+              "column": 46
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "attributeType": "Boolean"
+            }
+          }
+        },
+        {
+          "name": "allowedPattern",
+          "type": "string | null | undefined",
+          "description": "Set this to specify the pattern allowed by `preventInvalidInput`. If\nyou're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `allowedPattern`\nproperty.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 69,
+              "column": 8
+            },
+            "end": {
+              "line": 69,
+              "column": 38
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "alwaysFloatLabel",
+          "type": "boolean | null | undefined",
+          "description": "Set to true to always float the label. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to the\n`<paper-input-container>`'s `alwaysFloatLabel` property.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 75,
+              "column": 8
+            },
+            "end": {
+              "line": 75,
+              "column": 55
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "pattern",
+          "type": "string | null | undefined",
+          "description": "A pattern to validate the `input` with. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `pattern` property.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 81,
+              "column": 8
+            },
+            "end": {
+              "line": 81,
+              "column": 31
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "required",
+          "type": "boolean | null | undefined",
+          "description": "Set to true to mark the input as required. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `required` property.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 87,
+              "column": 8
+            },
+            "end": {
+              "line": 87,
+              "column": 33
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          }
+        },
+        {
+          "name": "errorMessage",
+          "type": "string | null | undefined",
+          "description": "The error message to display when the input is invalid. If you're using\nPaperInputBehavior to implement your own paper-input-like element,\nbind this to the `<paper-input-error>`'s content, if using.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 93,
+              "column": 8
+            },
+            "end": {
+              "line": 93,
+              "column": 36
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "charCounter",
+          "type": "boolean | null | undefined",
+          "description": "Set to true to show a character counter.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 97,
+              "column": 8
+            },
+            "end": {
+              "line": 97,
+              "column": 36
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          }
+        },
+        {
+          "name": "autoValidate",
+          "type": "boolean | null | undefined",
+          "description": "Set to true to auto-validate the input value. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<paper-input-container>`'s `autoValidate` property.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 103,
+              "column": 8
+            },
+            "end": {
+              "line": 103,
+              "column": 37
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          }
+        },
+        {
+          "name": "validator",
+          "type": "string | null | undefined",
+          "description": "Name of the validator to use. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<input is=\"iron-input\">`'s `validator` property.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 109,
+              "column": 8
+            },
+            "end": {
+              "line": 109,
+              "column": 33
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "autofocus",
+          "type": "boolean | null | undefined",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autofocus`\nproperty.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 115,
+              "column": 8
+            },
+            "end": {
+              "line": 115,
+              "column": 65
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"_autofocusChanged\"",
+              "attributeType": "Boolean"
+            }
+          }
+        },
+        {
+          "name": "inputmode",
+          "type": "string | null | undefined",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `inputmode`\nproperty.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 121,
+              "column": 8
+            },
+            "end": {
+              "line": 121,
+              "column": 33
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "minlength",
+          "type": "number | null | undefined",
+          "description": "The minimum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `minlength`\nproperty.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 128,
+              "column": 8
+            },
+            "end": {
+              "line": 128,
+              "column": 33
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Number"
+            }
+          }
+        },
+        {
+          "name": "maxlength",
+          "type": "number | null | undefined",
+          "description": "The maximum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `maxlength`\nproperty.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 135,
+              "column": 8
+            },
+            "end": {
+              "line": 135,
+              "column": 33
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Number"
+            }
+          }
+        },
+        {
+          "name": "name",
+          "type": "string | null | undefined",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `name` property.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 140,
+              "column": 8
+            },
+            "end": {
+              "line": 140,
+              "column": 28
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "placeholder",
+          "type": "string | null | undefined",
+          "description": "A placeholder string in addition to the label. If this is set, the label\nwill always float.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 145,
+              "column": 8
+            },
+            "end": {
+              "line": 149,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          },
+          "defaultValue": "\"\""
+        },
+        {
+          "name": "readonly",
+          "type": "boolean | null | undefined",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `readonly`\nproperty.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 155,
+              "column": 8
+            },
+            "end": {
+              "line": 155,
+              "column": 33
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          }
+        },
+        {
+          "name": "autocapitalize",
+          "type": "string | null | undefined",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocapitalize`\nproperty.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 161,
+              "column": 8
+            },
+            "end": {
+              "line": 161,
+              "column": 53
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          },
+          "defaultValue": "\"none\""
+        },
+        {
+          "name": "autocorrect",
+          "type": "string | null | undefined",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocorrect`\nproperty.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 167,
+              "column": 8
+            },
+            "end": {
+              "line": 167,
+              "column": 49
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          },
+          "defaultValue": "\"off\""
+        },
+        {
+          "name": "autosave",
+          "type": "string | null | undefined",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autosave`\nproperty, used with type=search.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 173,
+              "column": 8
+            },
+            "end": {
+              "line": 173,
+              "column": 32
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "chips",
+          "type": "Array.<Object>",
+          "description": "A list of chip items to render",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 180,
+              "column": 8
+            },
+            "end": {
+              "line": 180,
+              "column": 28
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Array"
+            }
+          }
+        },
+        {
+          "name": "_value",
+          "type": "string | null | undefined",
+          "description": "Actual paper-input value",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 184,
+              "column": 8
+            },
+            "end": {
+              "line": 184,
+              "column": 30
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "allowed",
+          "type": "Array.<String>",
+          "description": "List of allowed chips labels. Character case does not matter.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 189,
+              "column": 8
+            },
+            "end": {
+              "line": 189,
+              "column": 30
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Array"
+            }
+          }
+        },
+        {
+          "name": "source",
+          "type": "Object.<(Stirng | Object)>",
+          "description": "List of suggestions to render when the user type in the input field.\n\nEach array item can be a string which will be compared to user input.\nIf the item is an object is must contain the `value` property which\nis used to compare the values. It can also contain `icon` property\nwhich is used to render `<iron-icon>`. It may also contain\n`image` property which is used to pass to `<iron-image>` element.\n\nIf the suggestion item contains `id` property it's value will be returned\nas a value of the input. Otherwise `value` is used.\n\n### Example\n\n```json\n[\n \"item 1\",\n {\n   \"value\": \"Other item\",\n   \"icon\": \"add\"\n },\n {\n   \"value\": \"Image item\",\n   \"image\": \"path/to/image.png\"\n },\n {\n   \"value\": \"Rendered label\",\n   \"id\": \"returned-value\"\n }\n]\n```",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 224,
+              "column": 8
+            },
+            "end": {
+              "line": 224,
+              "column": 29
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Array"
+            }
+          }
+        }
+      ],
+      "methods": [
+        {
+          "name": "connectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 235,
+              "column": 4
+            },
+            "end": {
+              "line": 241,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "validate",
+          "description": "Validates the input element and sets an error style if needed.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 248,
+              "column": 4
+            },
+            "end": {
+              "line": 258,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "_autofocusChanged",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 260,
+              "column": 4
+            },
+            "end": {
+              "line": 271,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_computeChipRemovable",
+          "description": "Computes value for paper-chip's `removable` property.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 277,
+              "column": 4
+            },
+            "end": {
+              "line": 279,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "item",
+              "type": "Object",
+              "description": "`chips` list item."
+            }
+          ],
+          "return": {
+            "type": "Boolean"
+          }
+        },
+        {
+          "name": "addChip",
+          "description": "Adds a new chip to the list of chips.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 287,
+              "column": 4
+            },
+            "end": {
+              "line": 304,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "label",
+              "type": "String",
+              "description": "Label of the chip"
+            },
+            {
+              "name": "removable",
+              "type": "?Boolean",
+              "description": "True if the chip can be removed."
+            },
+            {
+              "name": "icon",
+              "type": "?String",
+              "description": "An icon to pass to the chip."
+            },
+            {
+              "name": "id",
+              "type": "?String",
+              "description": "An ID to be used as a value."
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_computeValue",
+          "description": "Computes value of the form input. Produced value is an array of chip\nlabels.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 310,
+              "column": 4
+            },
+            "end": {
+              "line": 321,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "record",
+              "type": "Object",
+              "description": "Polymer's data change record."
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_computeChipsValues",
+          "description": "Restores chips from passed value.\nWhen input's (this element) value change it computes list of chips",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 328,
+              "column": 4
+            },
+            "end": {
+              "line": 360,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value",
+              "type": "Array.<Object>",
+              "description": "List of chips definitions"
+            },
+            {
+              "name": "source",
+              "type": "Array.<Object>",
+              "description": "List of suggestions"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_findSource",
+          "description": "Finsd a suggestion source in the list of suggestions.\nPrimarly it looks for a value (lowercasing it) and then it compares\n`id` if defined.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 370,
+              "column": 4
+            },
+            "end": {
+              "line": 399,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "source",
+              "type": "Array.<(Object | String)>",
+              "description": "List of suggestions passed to the element"
+            },
+            {
+              "name": "value",
+              "type": "String",
+              "description": "Search value. Should be lowercased before calling this function"
+            },
+            {
+              "name": "id",
+              "type": "?String",
+              "description": "Optional ID to compare."
+            }
+          ],
+          "return": {
+            "type": "(String | Object | undefined)",
+            "desc": "Suggestion source or undefined if not found."
+          }
+        },
+        {
+          "name": "_isAllowed",
+          "description": "Tests if given value is allowed to enter when `allowed` property is set.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 406,
+              "column": 4
+            },
+            "end": {
+              "line": 421,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value",
+              "type": "String",
+              "description": "The value to test"
+            },
+            {
+              "name": "id",
+              "type": "?String",
+              "description": "The Suggestion id, if any."
+            }
+          ],
+          "return": {
+            "type": "Boolean",
+            "desc": "True if the value is allowed as a chip label."
+          }
+        },
+        {
+          "name": "_removeChip",
+          "description": "Removes a chip on a specific index.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 427,
+              "column": 4
+            },
+            "end": {
+              "line": 433,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "index",
+              "type": "Number",
+              "description": "Index of the chip in the `chips` array"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 21,
+          "column": 7
+        },
+        "end": {
+          "line": 436,
+          "column": 3
+        }
+      },
+      "privacy": "public",
+      "name": "ArcBehaviors.PaperChipInputMixin",
+      "attributes": [
+        {
+          "name": "label",
+          "description": "The label for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\n`<label>`'s content and `hidden` property, e.g.\n`<label hidden$=\"[[!label]]\">[[label]]</label>` in your `template`",
+          "sourceRange": {
+            "start": {
+              "line": 39,
+              "column": 8
+            },
+            "end": {
+              "line": 39,
+              "column": 29
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "value",
+          "description": "The value for this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<iron-input>`'s `bindValue`\nproperty, or the value property of your input that is `notify:true`.",
+          "sourceRange": {
+            "start": {
+              "line": 47,
+              "column": 8
+            },
+            "end": {
+              "line": 47,
+              "column": 42
+            }
+          },
+          "metadata": {},
+          "type": "*"
+        },
+        {
+          "name": "disabled",
+          "description": "Set to true to disable this input. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nboth the `<paper-input-container>`'s and the input's `disabled` property.",
+          "sourceRange": {
+            "start": {
+              "line": 53,
+              "column": 8
+            },
+            "end": {
+              "line": 53,
+              "column": 33
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "invalid",
+          "description": "Returns true if the value is invalid. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to both the\n`<paper-input-container>`'s and the input's `invalid` property.\n\nIf `autoValidate` is true, the `invalid` attribute is managed\nautomatically, which can clobber attempts to manage it manually.",
+          "sourceRange": {
+            "start": {
+              "line": 62,
+              "column": 8
+            },
+            "end": {
+              "line": 62,
+              "column": 46
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "allowed-pattern",
+          "description": "Set this to specify the pattern allowed by `preventInvalidInput`. If\nyou're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `allowedPattern`\nproperty.",
+          "sourceRange": {
+            "start": {
+              "line": 69,
+              "column": 8
+            },
+            "end": {
+              "line": 69,
+              "column": 38
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "always-float-label",
+          "description": "Set to true to always float the label. If you're using PaperInputBehavior\nto implement your own paper-input-like element, bind this to the\n`<paper-input-container>`'s `alwaysFloatLabel` property.",
+          "sourceRange": {
+            "start": {
+              "line": 75,
+              "column": 8
+            },
+            "end": {
+              "line": 75,
+              "column": 55
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "pattern",
+          "description": "A pattern to validate the `input` with. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `pattern` property.",
+          "sourceRange": {
+            "start": {
+              "line": 81,
+              "column": 8
+            },
+            "end": {
+              "line": 81,
+              "column": 31
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "required",
+          "description": "Set to true to mark the input as required. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<input is=\"iron-input\">`'s `required` property.",
+          "sourceRange": {
+            "start": {
+              "line": 87,
+              "column": 8
+            },
+            "end": {
+              "line": 87,
+              "column": 33
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "error-message",
+          "description": "The error message to display when the input is invalid. If you're using\nPaperInputBehavior to implement your own paper-input-like element,\nbind this to the `<paper-input-error>`'s content, if using.",
+          "sourceRange": {
+            "start": {
+              "line": 93,
+              "column": 8
+            },
+            "end": {
+              "line": 93,
+              "column": 36
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "char-counter",
+          "description": "Set to true to show a character counter.",
+          "sourceRange": {
+            "start": {
+              "line": 97,
+              "column": 8
+            },
+            "end": {
+              "line": 97,
+              "column": 36
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "auto-validate",
+          "description": "Set to true to auto-validate the input value. If you're using\nPaperInputBehavior to implement your own paper-input-like element, bind\nthis to the `<paper-input-container>`'s `autoValidate` property.",
+          "sourceRange": {
+            "start": {
+              "line": 103,
+              "column": 8
+            },
+            "end": {
+              "line": 103,
+              "column": 37
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "validator",
+          "description": "Name of the validator to use. If you're using PaperInputBehavior to\nimplement your own paper-input-like element, bind this to\nthe `<input is=\"iron-input\">`'s `validator` property.",
+          "sourceRange": {
+            "start": {
+              "line": 109,
+              "column": 8
+            },
+            "end": {
+              "line": 109,
+              "column": 33
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "autofocus",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autofocus`\nproperty.",
+          "sourceRange": {
+            "start": {
+              "line": 115,
+              "column": 8
+            },
+            "end": {
+              "line": 115,
+              "column": 65
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "inputmode",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `inputmode`\nproperty.",
+          "sourceRange": {
+            "start": {
+              "line": 121,
+              "column": 8
+            },
+            "end": {
+              "line": 121,
+              "column": 33
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "minlength",
+          "description": "The minimum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `minlength`\nproperty.",
+          "sourceRange": {
+            "start": {
+              "line": 128,
+              "column": 8
+            },
+            "end": {
+              "line": 128,
+              "column": 33
+            }
+          },
+          "metadata": {},
+          "type": "number | null | undefined"
+        },
+        {
+          "name": "maxlength",
+          "description": "The maximum length of the input value.\nIf you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `maxlength`\nproperty.",
+          "sourceRange": {
+            "start": {
+              "line": 135,
+              "column": 8
+            },
+            "end": {
+              "line": 135,
+              "column": 33
+            }
+          },
+          "metadata": {},
+          "type": "number | null | undefined"
+        },
+        {
+          "name": "name",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `name` property.",
+          "sourceRange": {
+            "start": {
+              "line": 140,
+              "column": 8
+            },
+            "end": {
+              "line": 140,
+              "column": 28
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "placeholder",
+          "description": "A placeholder string in addition to the label. If this is set, the label\nwill always float.",
+          "sourceRange": {
+            "start": {
+              "line": 145,
+              "column": 8
+            },
+            "end": {
+              "line": 149,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "readonly",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `readonly`\nproperty.",
+          "sourceRange": {
+            "start": {
+              "line": 155,
+              "column": 8
+            },
+            "end": {
+              "line": 155,
+              "column": 33
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "autocapitalize",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocapitalize`\nproperty.",
+          "sourceRange": {
+            "start": {
+              "line": 161,
+              "column": 8
+            },
+            "end": {
+              "line": 161,
+              "column": 53
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "autocorrect",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autocorrect`\nproperty.",
+          "sourceRange": {
+            "start": {
+              "line": 167,
+              "column": 8
+            },
+            "end": {
+              "line": 167,
+              "column": 49
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "autosave",
+          "description": "If you're using PaperInputBehavior to implement your own paper-input-like\nelement, bind this to the `<input is=\"iron-input\">`'s `autosave`\nproperty, used with type=search.",
+          "sourceRange": {
+            "start": {
+              "line": 173,
+              "column": 8
+            },
+            "end": {
+              "line": 173,
+              "column": 32
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "chips",
+          "description": "A list of chip items to render",
+          "sourceRange": {
+            "start": {
+              "line": 180,
+              "column": 8
+            },
+            "end": {
+              "line": 180,
+              "column": 28
+            }
+          },
+          "metadata": {},
+          "type": "Array.<Object>"
+        },
+        {
+          "name": "allowed",
+          "description": "List of allowed chips labels. Character case does not matter.",
+          "sourceRange": {
+            "start": {
+              "line": 189,
+              "column": 8
+            },
+            "end": {
+              "line": 189,
+              "column": 30
+            }
+          },
+          "metadata": {},
+          "type": "Array.<String>"
+        },
+        {
+          "name": "source",
+          "description": "List of suggestions to render when the user type in the input field.\n\nEach array item can be a string which will be compared to user input.\nIf the item is an object is must contain the `value` property which\nis used to compare the values. It can also contain `icon` property\nwhich is used to render `<iron-icon>`. It may also contain\n`image` property which is used to pass to `<iron-image>` element.\n\nIf the suggestion item contains `id` property it's value will be returned\nas a value of the input. Otherwise `value` is used.\n\n### Example\n\n```json\n[\n \"item 1\",\n {\n   \"value\": \"Other item\",\n   \"icon\": \"add\"\n },\n {\n   \"value\": \"Image item\",\n   \"image\": \"path/to/image.png\"\n },\n {\n   \"value\": \"Rendered label\",\n   \"id\": \"returned-value\"\n }\n]\n```",
+          "sourceRange": {
+            "start": {
+              "line": 224,
+              "column": 8
+            },
+            "end": {
+              "line": 224,
+              "column": 29
+            }
+          },
+          "metadata": {},
+          "type": "Object.<(Stirng | Object)>"
+        }
+      ],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": []
     }
   ]
 }
