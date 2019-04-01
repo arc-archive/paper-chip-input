@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
   <title>paper-chip-input test</title>
-  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-  <script src="../../web-component-tester/browser.js"></script>
-  <link rel="import" href="../../iron-icons/iron-icons.html">
-  <link rel="import" href="../paper-chip-input.html">
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../../../wct-browser-legacy/browser.js"></script>
+  <script type="module" src="../../../@polymer/iron-icons/iron-icons.js"></script>
+  <script type="module" src="../paper-chip-input.js"></script>
 </head>
 <body>
   <test-fixture id="Basic">
@@ -64,7 +64,9 @@
     </template>
   </test-fixture>
 
-  <script>
+  <script type="module">
+  import '../../../@polymer/iron-icons/iron-icons.js';
+  import '../paper-chip-input.js';
   suite('Basics', () => {
     let element;
 

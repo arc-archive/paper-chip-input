@@ -1,19 +1,17 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <title>api-request-editor demo</title>
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-    <link rel="import" href="../../shadycss/apply-shim.html">
-    <link rel="import" href="../../polymer/lib/elements/custom-style.html">
-    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../iron-icons/iron-icons.html">
-    <link rel="import" href="../../iron-icons/maps-icons.html">
-    <link rel="import" href="../../paper-styles/typography.html">
-    <link rel="import" href="../paper-chip-input.html">
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script type="module" src="../../../@webcomponents/shadycss/entrypoints/apply-shim.js"></script>
+    <script type="module" src="../../../@polymer/polymer/lib/elements/custom-style.js"></script>
+    <script type="module" src="../../../@polymer/polymer/lib/elements/dom-bind.js"></script>
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script type="module" src="../../../@polymer/iron-icons/iron-icons.js"></script>
+    <script type="module" src="../../../@polymer/iron-icons/maps-icons.js"></script>
+    <script type="module" src="../../../@polymer/paper-styles/typography.js"></script>
+    <script type="module" src="../paper-chip-input.js"></script>
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
       :root {
@@ -45,7 +43,7 @@
           </template>
 
           <h2>Predefined</h2>
-          <paper-chip-input label="Chips input demo" value="{{predefOut}}" chips='[{"label": "Chip #1"}, {"label": "Chip #2"}, {"label": "Removable chip", "removable": true}]'></paper-chip-input>
+          <paper-chip-input label="Chips input demo" value="{{predefOut}}" chips="[{&quot;label&quot;: &quot;Chip #1&quot;}, {&quot;label&quot;: &quot;Chip #2&quot;}, {&quot;label&quot;: &quot;Removable chip&quot;, &quot;removable&quot;: true}]"></paper-chip-input>
           <template is="dom-if" if="[[predefOut]]">
             <label>Value:</label>
             <output>[[predefOut]]</output>
@@ -53,14 +51,14 @@
 
           <h2>Validation with pattern</h2>
           <p>Pattern: <i>[a-zA-Z]+</i></p>
-          <paper-chip-input label="Chips input demo" pattern="[a-zA-Z]+" auto-validate error-message="Only [a-zA-Z]+ allowed" value="{{validateOut}}"></paper-chip-input>
+          <paper-chip-input label="Chips input demo" pattern="[a-zA-Z]+" auto-validate="" error-message="Only [a-zA-Z]+ allowed" value="{{validateOut}}"></paper-chip-input>
           <template is="dom-if" if="[[validateOut]]">
             <label>Value:</label>
             <output>[[validateOut]]</output>
           </template>
 
           <h2>Required input</h2>
-          <paper-chip-input label="Chips input demo" required auto-validate error-message="This input is required" value="{{validate2Out}}"></paper-chip-input>
+          <paper-chip-input label="Chips input demo" required="" auto-validate="" error-message="This input is required" value="{{validate2Out}}"></paper-chip-input>
           <template is="dom-if" if="[[validate2Out]]">
             <label>Value:</label>
             <output>[[validate2Out]]</output>
@@ -68,7 +66,7 @@
 
           <h2>Allowed chips only</h2>
           <p>Allowed are: <i>Apple</i>, <i>Orange</i>, and <i>Banana</i>.</p>
-          <paper-chip-input label="Only allowed will become chips and value" allowed='["apple","Orange","BANANA"]' value="{{allowedOut}}"></paper-chip-input>
+          <paper-chip-input label="Only allowed will become chips and value" allowed="[&quot;apple&quot;,&quot;Orange&quot;,&quot;BANANA&quot;]" value="{{allowedOut}}"></paper-chip-input>
           <template is="dom-if" if="[[allowedOut]]">
             <label>Value:</label>
             <output>[[allowedOut]]</output>
@@ -116,7 +114,7 @@
         </div>
       </template>
     </dom-bind>
-    <script>
+    <script type="module">
     (function(app) {
       app.simpleSuggestions = ['Apple', 'Apricot', 'Avocado',
         'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry',
