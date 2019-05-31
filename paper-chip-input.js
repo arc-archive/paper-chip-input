@@ -238,6 +238,9 @@ class PaperChipInput extends PaperChipInputMixin(PolymerElement) {
     }
     this.addChip(item.value, true, item.icon, item.id);
     this._value = '';
+    setTimeout(() => {
+      this._inputElement.inputElement.focus();
+    });
   }
   /**
    * Chips are focusable elements and they work really
