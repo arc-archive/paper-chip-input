@@ -5,14 +5,14 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   paper-chip-input-mixin.html
+ *   paper-chip-input-mixin.js
  */
 
 
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-/// <reference path="../polymer/types/lib/utils/mixin.d.ts" />
+export {PaperChipInputMixin};
 
 declare namespace ArcBehaviors {
 
@@ -310,3 +310,5 @@ declare namespace ArcBehaviors {
     _removeChip(index: Number|null): void;
   }
 }
+
+export {PaperChipInputMixinConstructor};

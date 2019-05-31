@@ -1,4 +1,4 @@
-<!--
+/**
 @license
 Copyright 2018 The Advanced REST client authors <arc@mulesoft.com>
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -10,17 +10,8 @@ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
--->
-<link rel="import" href="../polymer/lib/utils/mixin.html">
-<script>
-(function(global) {
-'use strict';
-if (!global.ArcBehaviors) {
-  /**
-   * @namespace ArcBehaviors
-   */
-  global.ArcBehaviors = {};
-}
+*/
+import {dedupingMixin} from '../../@polymer/polymer/lib/utils/mixin.js';
 /**
  * A behavior to be implemented with inputs that uses `paper-chips`.
  *
@@ -28,7 +19,7 @@ if (!global.ArcBehaviors) {
  * @mixinFunction
  * @memberof ArcBehaviors
  */
-ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
+export const PaperChipInputMixin = dedupingMixin((base) => {
   /**
    * @polymer
    * @mixinClass
@@ -444,5 +435,3 @@ ArcBehaviors.PaperChipInputMixin = Polymer.dedupingMixin((base) => {
   }
   return PCImixin;
 });
-})(window);
-</script>
