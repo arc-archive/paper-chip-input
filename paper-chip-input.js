@@ -15,13 +15,13 @@ the License.
   from HTML and may be out of place here. Review them and
   then delete this comment!
 */
-import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {PolymerElement} from '@polymer/polymer/polymer-element.js';
 import {PaperChipInputMixin} from './paper-chip-input-mixin.js';
-import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
-import '../../@polymer/paper-input/paper-input.js';
-import '../../@advanced-rest-client/paper-chip/paper-chip.js';
-import '../../@polymer/iron-a11y-keys/iron-a11y-keys.js';
-import '../../@polymer/iron-icon/iron-icon.js';
+import {html} from '@polymer/polymer/lib/utils/html-tag.js';
+import '@polymer/paper-input/paper-input.js';
+import '@advanced-rest-client/paper-chip/paper-chip.js';
+import '@polymer/iron-a11y-keys/iron-a11y-keys.js';
+import '@polymer/iron-icon/iron-icon.js';
 import './paper-chip-autocomplete.js';
 /**
  * `paper-chip-input`

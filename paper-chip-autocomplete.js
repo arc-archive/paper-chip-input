@@ -15,15 +15,15 @@ the License.
   from HTML and may be out of place here. Review them and
   then delete this comment!
 */
-import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
-import {mixinBehaviors} from '../../@polymer/polymer/lib/legacy/class.js';
-import '../../@polymer/iron-a11y-keys/iron-a11y-keys.js';
-import '../../@polymer/paper-ripple/paper-ripple.js';
-import '../../@polymer/paper-item/paper-item.js';
-import '../../@polymer/iron-selector/iron-selector.js';
-import {IronScrollTargetBehavior} from '../../@polymer/iron-scroll-target-behavior/iron-scroll-target-behavior.js';
-import {IronOverlayBehavior} from '../../@polymer/iron-overlay-behavior/iron-overlay-behavior.js';
-import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
+import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class.js';
+import '@polymer/iron-a11y-keys/iron-a11y-keys.js';
+import '@polymer/paper-ripple/paper-ripple.js';
+import '@polymer/paper-item/paper-item.js';
+import '@polymer/iron-selector/iron-selector.js';
+import {IronScrollTargetBehavior} from '@polymer/iron-scroll-target-behavior/iron-scroll-target-behavior.js';
+import {IronOverlayBehavior} from '@polymer/iron-overlay-behavior/iron-overlay-behavior.js';
+import {html} from '@polymer/polymer/lib/utils/html-tag.js';
 /**
  * An autocomplete element for `paper-chip-input`.
  * It is a lightweigth version of `paper-autocomplete` element.
