@@ -72,7 +72,7 @@ npm install --save @advanced-rest-client/paper-chip-input
 <html>
   <head>
     <script type="module">
-      import './node_modules/@advanced-rest-client/paper-chip-input/paper-chip-input.js';
+      import '@advanced-rest-client/paper-chip-input/paper-chip-input.js';
     </script>
   </head>
   <body>
@@ -81,14 +81,14 @@ npm install --save @advanced-rest-client/paper-chip-input
 </html>
 ```
 
-### In a Polymer 3 element
+### In a LitElement
 
 ```js
-import {PolymerElement, html} from './node_modules/@polymer/polymer';
-import './node_modules/@advanced-rest-client/paper-chip-input/paper-chip-input.js';
+import { LitElement, html } from 'lit-element';
+import '@advanced-rest-client/paper-chip-input/paper-chip-input.js';
 
-class SampleElement extends PolymerElement {
-  static get template() {
+class SampleElement extends LitElement {
+  render() {
     return html`
     <paper-chip-input></paper-chip-input>
     `;
@@ -101,19 +101,17 @@ customElements.define('sample-element', SampleElement);
 
 ```sh
 git clone https://github.com/advanced-rest-client/paper-chip-input
-cd api-url-editor
+cd paper-chip-input
 npm install
-npm install -g polymer-cli
 ```
 
 ### Running the demo locally
 
 ```sh
-polymer serve --npm
-open http://127.0.0.1:<port>/demo/
+npm start
 ```
 
 ### Running the tests
 ```sh
-polymer test --npm
+polymer test
 ```

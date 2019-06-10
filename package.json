@@ -19,16 +19,14 @@
     "@advanced-rest-client/arc-demo-helper": "^1.0.1",
     "@advanced-rest-client/testing-karma-sl": "^1.0.2",
     "@open-wc/testing": "^0.11.1",
-    "@open-wc/testing-karma": "^2.0.0",
+    "@open-wc/testing-karma": "^2.0.4",
     "@polymer/gen-typescript-declarations": "^1.6.1",
     "@polymer/iron-icons": "^3.0.0",
-    "@polymer/iron-test-helpers": "^3.0.0",
-    "@polymer/test-fixture": "^4.0.2",
     "@webcomponents/webcomponentsjs": "^2.2.10",
+    "lit-html": "^1.0.0",
     "owc-dev-server": "^0.3.0",
-    "webpack-merge": "^4.1.5",
     "sinon": "^7.3.2",
-    "lit-html": "^1.0.0"
+    "webpack-merge": "^4.1.5"
   },
   "scripts": {
     "start": "owc-dev-server -o",
@@ -48,15 +46,14 @@
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "dependencies": {
+    "@advanced-rest-client/arc-overlay-mixin": "^1.0.1",
+    "@advanced-rest-client/arc-scroll-target-mixin": "^1.0.0",
     "@advanced-rest-client/paper-chip": "^3.1.0",
     "@polymer/iron-a11y-keys": "^3.0.0",
     "@polymer/iron-icon": "^3.0.0",
-    "@polymer/iron-overlay-behavior": "^3.0.0",
-    "@polymer/iron-scroll-target-behavior": "^3.0.0",
     "@polymer/iron-selector": "^3.0.0",
     "@polymer/paper-input": "^3.0.2",
     "@polymer/paper-item": "^3.0.0",
-    "@polymer/paper-ripple": "^3.0.0",
-    "@polymer/polymer": "^3.2.0"
+    "@polymer/paper-ripple": "^3.0.0"
   }
 }

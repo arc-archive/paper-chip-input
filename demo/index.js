@@ -110,31 +110,13 @@ class DemoPage {
     this.validate2Out = '';
     this.allowedOut = '';
 
-    this._basicValueChanged = this._basicValueChanged.bind(this);
-    this._predefValueChanged = this._predefValueChanged.bind(this);
-    this._validateValueChanged = this._validateValueChanged.bind(this);
-    this._validate2ValueChanged = this._validate2ValueChanged.bind(this);
-    this._allowedValueChanged = this._allowedValueChanged.bind(this);
+    this._inputValueChanged = this._inputValueChanged.bind(this);
+    this._predefChipsChanged = this._predefChipsChanged.bind(this);
   }
 
-  _basicValueChanged(e) {
-    this._renderChipArray(e.detail.value, 'basicOut');
-  }
-
-  _predefValueChanged(e) {
-    this._renderChipArray(e.detail.value, 'predefOut');
-  }
-
-  _validateValueChanged(e) {
-    this._renderChipArray(e.detail.value, 'validateOut');
-  }
-
-  _validate2ValueChanged(e) {
-    this._renderChipArray(e.detail.value, 'validate2Out');
-  }
-
-  _allowedValueChanged(e) {
-    this._renderChipArray(e.detail.value, 'allowedOut');
+  _inputValueChanged(e) {
+    const prop = e.target.dataset.property;
+    this._renderChipArray(e.detail.value, prop);
   }
 
   _renderChipArray(arr, prop) {
@@ -148,6 +130,10 @@ class DemoPage {
     });
   }
 
+  _predefChipsChanged(e) {
+    this.predefChips = e.detail.value;
+  }
+
   renderChipValue(value) {
     return value ? html`<label>Value:</label><output>${value}</output>` : '';
   }
@@ -155,79 +141,94 @@ class DemoPage {
   render() {
     render(html`<div class="vertical-section-container centered" role="main">
       <h2>Basics</h2>
-      <paper-chip-input label="Chips input demo" @value-changed="${this._basicValueChanged}"></paper-chip-input>
+      <paper-chip-input
+        data-property="basicOut"
+        label="Chips input demo"
+        @value-changed="${this._inputValueChanged}"></paper-chip-input>
       ${this.renderChipValue(this.basicOut)}
 
       <h2>Predefined</h2>
-      <paper-chip-input label="Chips input demo"
-        @value-changed="${this._predefValueChanged}" .chips="${this.predefChips}"></paper-chip-input>
+      <paper-chip-input
+        data-property="predefOut"
+        label="Chips input demo"
+        @value-changed="${this._inputValueChanged}"
+        .chips="${this.predefChips}"
+        @chips-changed="${this._predefChipsChanged}"></paper-chip-input>
       ${this.renderChipValue(this.predefOut)}
 
       <h2>Validation with pattern</h2>
       <p>Pattern: <i>[a-zA-Z]+</i></p>
       <paper-chip-input
+        data-property="validateOut"
         label="Chips input demo"
         pattern="[a-zA-Z]+"
         auto-validate=""
         error-message="Only [a-zA-Z]+ allowed"
-        @value-changed="${this._validateValueChanged}"></paper-chip-input>
+        @value-changed="${this._inputValueChanged}"></paper-chip-input>
       ${this.renderChipValue(this.validateOut)}
 
       <h2>Required input</h2>
       <paper-chip-input
+        data-property="validate2Out"
         label="Chips input demo"
         required="" auto-validate=""
         error-message="This input is required"
-        @value-changed="${this._validate2ValueChanged}"></paper-chip-input>
+        @value-changed="${this._inputValueChanged}"></paper-chip-input>
       ${this.renderChipValue(this.validate2Out)}
 
       <h2>Allowed chips only</h2>
       <p>Allowed are: <i>Apple</i>, <i>Orange</i>, and <i>Banana</i>.</p>
       <paper-chip-input
+        data-property="allowedOut"
         label="Only allowed will become chips and value"
         allowed="[&quot;apple&quot;,&quot;Orange&quot;,&quot;BANANA&quot;]"
-        @value-changed="${this._allowedValueChanged}"></paper-chip-input>
+        @value-changed="${this._inputValueChanged}"></paper-chip-input>
       ${this.renderChipValue(this.allowedOut)}
 
       <h2>Simple auto suggestions</h2>
       <p>Try a name of a fruit</p>
-      <paper-chip-input label="Type your favourite fruits" value="{{auto1Out}}" source="[[simpleSuggestions]]"></paper-chip-input>
-      <template is="dom-if" if="[[auto1Out]]">
-        <label>Value:</label>
-        <output>[[auto1Out]]</output>
-      </template>
+      <paper-chip-input
+        data-property="auto1Out"
+        label="Type your favourite fruits"
+        .source="${this.simpleSuggestions}"
+        @value-changed="${this._inputValueChanged}"></paper-chip-input>
+      ${this.renderChipValue(this.auto1Out)}
 
       <h2>Suggestions with icons</h2>
       <p>Start with "<b>b</b>"</p>
-      <paper-chip-input label="Type your favourite fruits" value="{{auto2Out}}" source="[[iconSuggestions]]"></paper-chip-input>
-      <template is="dom-if" if="[[auto2Out]]">
-        <label>Value:</label>
-        <output>[[auto2Out]]</output>
-      </template>
+      <paper-chip-input
+        data-property="auto2Out"
+        label="Type your favourite fruits"
+        @value-changed="${this._inputValueChanged}"
+        .source="${this.iconSuggestions}"></paper-chip-input>
+      ${this.renderChipValue(this.auto2Out)}
 
       <h2>Restoring values with suggestions with icons</h2>
       <p>Chips have icons restored from suggestions from passed value</p>
-      <paper-chip-input label="Type your favourite fruits" value="{{auto5Out}}" source="[[iconSuggestions]]"></paper-chip-input>
-      <template is="dom-if" if="[[auto5Out]]">
-        <label>Value:</label>
-        <output>[[auto5Out]]</output>
-      </template>
+      <paper-chip-input
+        data-property="auto5Out"
+        label="Type your favourite fruits"
+        .value="${this.auto5Out}"
+        .source="${this.iconSuggestions}"></paper-chip-input>
+      ${this.renderChipValue(this.auto5Out)}
 
       <h2>Suggestions with IDs</h2>
       <p>Similar to the above but the returned value is the "id" set on suggestion.</p>
-      <paper-chip-input label="Type your favourite fruits" value="{{auto3Out}}" source="[[idSuggestions]]"></paper-chip-input>
-      <template is="dom-if" if="[[auto3Out]]">
-        <label>Value:</label>
-        <output>[[auto3Out]]</output>
-      </template>
+      <paper-chip-input
+        data-property="auto3Out"
+        label="Type your favourite fruits"
+        .source="${this.idSuggestions}"
+        @value-changed="${this._inputValueChanged}"></paper-chip-input>
+      ${this.renderChipValue(this.auto3Out)}
 
       <h2>Restoring from IDs</h2>
       <p>Chips are restored from suggestions from passed value containing IDs.</p>
-      <paper-chip-input label="Type your favourite fruits" value="{{auto4Out}}" source="[[idSuggestions]]"></paper-chip-input>
-      <template is="dom-if" if="[[auto4Out]]">
-        <label>Value:</label>
-        <output>[[auto4Out]]</output>
-      </template>
+      <paper-chip-input
+        data-property="auto4Out"
+        label="Type your favourite fruits"
+        .value="${this.auto4Out}"
+        .source="${this.idSuggestions}"></paper-chip-input>
+      ${this.renderChipValue(this.auto4Out)}
     </div>`, document.querySelector('#demo'));
   }
 }
