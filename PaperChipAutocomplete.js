@@ -142,7 +142,7 @@ export class PaperChipAutocomplete extends ArcOverlayMixin(ArcScrollTargetMixin(
    * True if the overlay is currently displayed.
    */
   get opened() {
-    return this._opened;
+    return this._opened || false;
   }
 
   set opened(value) {
