@@ -44,7 +44,6 @@ export const PaperChipInputMixin = (superClass) => class extends superClass {
        */
       value: {
         type: Array,
-        // noAccessor: true
       },
       /**
        * Set to true to disable this input. If you're using PaperInputBehavior to
@@ -135,8 +134,7 @@ export const PaperChipInputMixin = (superClass) => class extends superClass {
        * property.
        */
       autofocus: {
-        type: Boolean,
-        // noAccessor: true
+        type: Boolean
       },
       /**
        * If you're using PaperInputBehavior to implement your own paper-input-like
@@ -218,8 +216,7 @@ export const PaperChipInputMixin = (superClass) => class extends superClass {
        * be removed. It is added by default when chip's source is user input.
        */
       chips: {
-        type: Array,
-        // noAccessor: true
+        type: Array
       },
       /**
        * Actual paper-input value
