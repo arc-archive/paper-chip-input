@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const createDefaultConfig = require('@open-wc/testing-karma/default-config');
+const createDefaultConfig = require('@advanced-rest-client/a11y-suite/default-config.js');
 const merge = require('webpack-merge');
 
 module.exports = (config) => {

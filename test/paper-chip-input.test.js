@@ -1,6 +1,7 @@
 import { fixture, assert, nextFrame } from '@open-wc/testing';
 import '@polymer/iron-icons/iron-icons.js';
 import sinon from 'sinon/pkg/sinon-esm.js';
+import { a11ySuite } from '@advanced-rest-client/a11y-suite/index.js';
 import '../paper-chip-input.js';
 
 describe('<paper-chip-input>', () => {
@@ -508,6 +509,26 @@ describe('<paper-chip-input>', () => {
     it('Returns undefined when not found in objects and no id', () => {
       const result = element._findSource([{value: 'test', id: 'id'}], 'other');
       assert.isUndefined(result);
+    });
+  });
+
+  describe('a11y', () => {
+    it('Passes accessibility tests', async () => {
+      // tabindex is passed to the internal input element and this one should not have it
+      // I am not sure what "aria-input-field-name" is about...
+      const ignoredRules = ['aria-input-field-name', 'tabindex'];
+      const opts = { ignoredRules };
+
+      await a11ySuite('Normal state', '<paper-chip-input name="i1" label="x"></paper-chip-input>', opts);
+      await a11ySuite('Required', '<paper-chip-input name="i2" label="x" required></paper-chip-input>', opts);
+      await a11ySuite('Disabled', '<paper-chip-input name="i3" label="x" disabled></paper-chip-input>', opts);
+      await a11ySuite('Read only', '<paper-chip-input name="i4" label="x" readonly></paper-chip-input>', opts);
+      await a11ySuite('Suggestions', '<paper-chip-input name="i5" label="x" readonly></paper-chip-input>', {
+        ignoredRules,
+        afterFixture: (element) => {
+          element.source = ['Apple', 'Apricot', 'Avocado'];
+        }
+      });
     });
   });
 });

@@ -16,6 +16,7 @@
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "devDependencies": {
+    "@advanced-rest-client/a11y-suite": "^1.0.0",
     "@advanced-rest-client/arc-demo-helper": "^1.0.3",
     "@advanced-rest-client/testing-karma-sl": "^1.0.2",
     "@open-wc/testing": "^0.11.1",

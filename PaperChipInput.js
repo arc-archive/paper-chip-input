@@ -126,6 +126,9 @@ export class PaperChipInput extends PaperChipInputMixin(LitElement) {
     if (!this._inputElement.hasAttribute('tabindex')) {
       this._inputElement.setAttribute('tabindex', 0);
     }
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'textbox');
+    }
     this._positionTarget = this._inputElement.inputElement;
   }
   /**

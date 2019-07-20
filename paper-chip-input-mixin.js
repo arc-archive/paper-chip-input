@@ -350,6 +350,65 @@ export const PaperChipInputMixin = (superClass) => class extends superClass {
     this._source = value;
     this.requestUpdate('source', oldValue);
     this._computeChipsValues(this.value, value);
+    if (value && value.length) {
+      this.setAttribute('aria-autocomplete', 'list');
+    } else {
+      this.removeAttribute('aria-autocomplete');
+    }
+  }
+
+  get readonly() {
+    return this._readonly;
+  }
+
+  set readonly(value) {
+    const oldValue = this._readonly;
+    if (oldValue === value) {
+      return;
+    }
+    this._readonly = value;
+    this.requestUpdate('readonly', oldValue);
+    if (value) {
+      this.setAttribute('aria-readonly', 'true');
+    } else {
+      this.removeAttribute('aria-readonly');
+    }
+  }
+
+  get required() {
+    return this._required;
+  }
+
+  set required(value) {
+    const oldValue = this._required;
+    if (oldValue === value) {
+      return;
+    }
+    this._required = value;
+    this.requestUpdate('required', oldValue);
+    if (value) {
+      this.setAttribute('aria-required', 'true');
+    } else {
+      this.removeAttribute('aria-required');
+    }
+  }
+
+  get disabled() {
+    return this._disabled;
+  }
+
+  set disabled(value) {
+    const oldValue = this._disabled;
+    if (oldValue === value) {
+      return;
+    }
+    this._disabled = value;
+    this.requestUpdate('disabled', oldValue);
+    if (value) {
+      this.setAttribute('aria-disabled', 'true');
+    } else {
+      this.removeAttribute('aria-disabled');
+    }
   }
 
   constructor() {
