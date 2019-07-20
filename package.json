@@ -1,7 +1,22 @@
 {
+  "name": "@advanced-rest-client/paper-chip-input",
   "description": "A material design input with chips",
+  "version": "3.1.1",
+  "license": "Apache-2.0",
+  "main": "paper-chip-input.js",
   "keywords": [
-    "api-components"
+    "api-components",
+    "input",
+    "chip",
+    "material-design"
+  ],
+  "authors": [
+    "Pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
+  ],
+  "contributors": [
+    "Pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "repository": {
     "type": "git",
@@ -11,18 +26,6 @@
     "url": "https://github.com/advanced-rest-client/paper-chip-input/issues",
     "email": "arc@mulesoft.com"
   },
-  "name": "@advanced-rest-client/paper-chip-input",
-  "version": "3.1.1",
-  "license": "Apache-2.0",
-  "main": "paper-chip-input.js",
-  "authors": [
-    "Pawel Psztyc",
-    "The Advanced REST client authors <arc@mulesoft.com>"
-  ],
-  "contributors": [
-    "Pawel Psztyc",
-    "The Advanced REST client authors <arc@mulesoft.com>"
-  ],
   "dependencies": {
     "@advanced-rest-client/arc-overlay-mixin": "^1.0.1",
     "@advanced-rest-client/arc-scroll-target-mixin": "^1.0.2",
