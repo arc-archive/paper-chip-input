@@ -1,4 +1,4 @@
-import {fixture, assert, nextFrame} from '@open-wc/testing';
+import { fixture, assert, nextFrame } from '@open-wc/testing';
 import '@polymer/iron-icons/iron-icons.js';
 import sinon from 'sinon/pkg/sinon-esm.js';
 import '../paper-chip-autocomplete.js';
