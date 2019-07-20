@@ -105,11 +105,6 @@ export class PaperChipAutocomplete extends ArcOverlayMixin(ArcScrollTargetMixin(
        */
       _hasSuggestions: { type: Boolean },
       /**
-       * Application's / parent element's scroll target element.
-       * @type {HTMLElement}
-       */
-      scrollTarget: { type: Object },
-      /**
        * Sizing target element. It is used to compute the size of the
        * autocomplete container.
        * @type {HTMLElement}
