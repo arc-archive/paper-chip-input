@@ -492,22 +492,22 @@ describe('<paper-chip-input>', () => {
     });
 
     it('Finds object item by value', () => {
-      const result = element._findSource([{value: 'test'}], 'test');
-      assert.deepEqual(result, {value: 'test'});
+      const result = element._findSource([{ value: 'test' }], 'test');
+      assert.deepEqual(result, { value: 'test' });
     });
 
     it('Finds object item by id', () => {
-      const result = element._findSource([{value: 'test', id: 'other'}], 'other', 'other');
-      assert.deepEqual(result, {value: 'test', id: 'other'});
+      const result = element._findSource([{ value: 'test', id: 'other' }], 'other', 'other');
+      assert.deepEqual(result, { value: 'test', id: 'other' });
     });
 
     it('Returns undefined when not found in objects', () => {
-      const result = element._findSource([{value: 'test', id: 'id'}], 'other', 'other');
+      const result = element._findSource([{ value: 'test', id: 'id' }], 'other', 'other');
       assert.isUndefined(result);
     });
 
     it('Returns undefined when not found in objects and no id', () => {
-      const result = element._findSource([{value: 'test', id: 'id'}], 'other');
+      const result = element._findSource([{ value: 'test', id: 'id' }], 'other');
       assert.isUndefined(result);
     });
   });
