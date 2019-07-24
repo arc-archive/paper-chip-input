@@ -347,3 +347,19 @@
 
 
 
+## 3.1.2 (2019-07-24)
+
+
+### Bug Fixes
+
+* fixing icon setting propagation ([1994ebf](https://github.com/advanced-rest-client/paper-chip-input/commit/1994ebf))
+* fixing linter errors ([f101d4f](https://github.com/advanced-rest-client/paper-chip-input/commit/f101d4f))
+* fixing linter errors ([d676ad4](https://github.com/advanced-rest-client/paper-chip-input/commit/d676ad4))
+
+
+### Features
+
+* adding shorthand `on*` event registration setters ([34d3fa5](https://github.com/advanced-rest-client/paper-chip-input/commit/34d3fa5))
+
+
+
