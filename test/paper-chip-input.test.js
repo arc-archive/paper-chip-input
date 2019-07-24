@@ -536,6 +536,132 @@ describe('<paper-chip-input>', () => {
     });
   });
 
+  describe('onchanged', () => {
+    let element;
+    beforeEach(async () => {
+      element = await basicFixture();
+    });
+
+    it('Getter returns previously registered handler', () => {
+      assert.isUndefined(element.onchanged);
+      const f = () => {};
+      element.onchanged = f;
+      assert.isTrue(element.onchanged === f);
+    });
+
+    it('Calls registered function', () => {
+      let called = false;
+      const f = () => {
+        called = true;
+      };
+      element.onchanged = f;
+      element.value = ['a'];
+      element.onchanged = null;
+      assert.isTrue(called);
+    });
+
+    it('Unregisteres old function', () => {
+      let called1 = false;
+      let called2 = false;
+      const f1 = () => {
+        called1 = true;
+      };
+      const f2 = () => {
+        called2 = true;
+      };
+      element.onchanged = f1;
+      element.onchanged = f2;
+      element.value = ['a'];
+      element.onchanged = null;
+      assert.isFalse(called1);
+      assert.isTrue(called2);
+    });
+  });
+
+  describe('oninvalid', () => {
+    let element;
+    beforeEach(async () => {
+      element = await basicFixture();
+    });
+
+    it('Getter returns previously registered handler', () => {
+      assert.isUndefined(element.oninvalid);
+      const f = () => {};
+      element.oninvalid = f;
+      assert.isTrue(element.oninvalid === f);
+    });
+
+    it('Calls registered function', () => {
+      let called = false;
+      const f = () => {
+        called = true;
+      };
+      element.oninvalid = f;
+      element.invalid = true;
+      element.oninvalid = null;
+      assert.isTrue(called);
+    });
+
+    it('Unregisteres old function', () => {
+      let called1 = false;
+      let called2 = false;
+      const f1 = () => {
+        called1 = true;
+      };
+      const f2 = () => {
+        called2 = true;
+      };
+      element.oninvalid = f1;
+      element.oninvalid = f2;
+      element.invalid = true;
+      element.oninvalid = null;
+      assert.isFalse(called1);
+      assert.isTrue(called2);
+    });
+  });
+
+  describe('onchipschanged', () => {
+    let element;
+    beforeEach(async () => {
+      element = await basicFixture();
+    });
+
+    it('Getter returns previously registered handler', () => {
+      assert.isUndefined(element.onchipschanged);
+      const f = () => {};
+      element.onchipschanged = f;
+      assert.isTrue(element.onchipschanged === f);
+    });
+
+    it('Calls registered function', () => {
+      let called = false;
+      const f = () => {
+        called = true;
+      };
+      element.onchipschanged = f;
+      element.addChip('test', true);
+      element.onchipschanged = null;
+      assert.isTrue(called);
+    });
+
+    it('Unregisteres old function', () => {
+      let called1 = false;
+      let called2 = false;
+      const f1 = () => {
+        called1 = true;
+      };
+      const f2 = () => {
+        called2 = true;
+      };
+      element.onchipschanged = f1;
+      element.onchipschanged = f2;
+      element.addChip('test', true);
+      element.onchipschanged = null;
+      assert.isFalse(called1);
+      assert.isTrue(called2);
+    });
+  });
+
   describe('a11y', () => {
     it('Passes accessibility tests', async () => {
       // tabindex is passed to the internal input element and this one should not have it

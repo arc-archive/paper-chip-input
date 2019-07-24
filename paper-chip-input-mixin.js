@@ -410,6 +410,48 @@ export const PaperChipInputMixin = (superClass) => class extends superClass {
       this.removeAttribute('aria-disabled');
     }
   }
+  /**
+   * @return {Function} Previously registered handler for `value-changed` event
+   */
+  get onchanged() {
+    return this['_onvalue-changed'];
+  }
+  /**
+   * Registers a callback function for `value-changed` event
+   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * to clear the listener.
+   */
+  set onchanged(value) {
+    this._registerCallback('value-changed', value);
+  }
+  /**
+   * @return {Function} Previously registered handler for `invalid-changed` event
+   */
+  get oninvalid() {
+    return this['_oninvalid-changed'];
+  }
+  /**
+   * Registers a callback function for `invalid-changed` event
+   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * to clear the listener.
+   */
+  set oninvalid(value) {
+    this._registerCallback('invalid-changed', value);
+  }
+  /**
+   * @return {Function} Previously registered handler for `chips-changed` event
+   */
+  get onchipschanged() {
+    return this['_onchips-changed'];
+  }
+  /**
+   * Registers a callback function for `chips-changed` event
+   * @param {Function} value A callback to register. Pass `null` or `undefined`
+   * to clear the listener.
+   */
+  set onchipschanged(value) {
+    this._registerCallback('chips-changed', value);
+  }
 
   constructor() {
     super();
@@ -424,6 +466,19 @@ export const PaperChipInputMixin = (superClass) => class extends superClass {
     if (!this._inputElement.hasAttribute('tabindex')) {
       this._inputElement.setAttribute('tabindex', 0);
     }
+  }
+
+  _registerCallback(eventType, value) {
+    const key = `_on${eventType}`;
+    if (this[key]) {
+      this.removeEventListener(eventType, this[key]);
+    }
+    if (typeof value !== 'function') {
+      this[key] = null;
+      return;
+    }
+    this[key] = value;
+    this.addEventListener(eventType, value);
   }
 
   /**

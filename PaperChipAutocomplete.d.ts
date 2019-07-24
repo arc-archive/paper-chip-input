@@ -98,11 +98,6 @@ declare namespace UiElements {
     _suggestions: Array<object|null>|null;
 
     /**
-     * Application's / parent element's scroll target element.
-     */
-    scrollTarget: HTMLElement|null;
-
-    /**
      * Sizing target element. It is used to compute the size of the
      * autocomplete container.
      */
