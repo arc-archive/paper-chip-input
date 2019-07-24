@@ -23,6 +23,12 @@ describe('<paper-chip-input>', () => {
         chips='[{"label": "c-1"}, {"label": "c-2", "removable": true}, {"label": "c-3"}]'></paper-chip-input>`));
   }
 
+  async function chipsWithIconFixture() {
+    return (await fixture(`
+      <paper-chip-input chipremoveicon="add"
+        chips='[{"label": "c-1"}, {"label": "c-2", "removable": true}, {"label": "c-3"}]'></paper-chip-input>`));
+  }
+
   async function allRemoveFixture() {
     const str = JSON.stringify([
       { label: 'c-1', removable: true },
@@ -139,7 +145,7 @@ describe('<paper-chip-input>', () => {
 
     it('Allows only "allowed" chips (by id)', async () => {
       element = await allowedFixture();
-      element.source = [{value: 'c1 label', id: 'c1'}];
+      element.source = [{ value: 'c1 label', id: 'c1' }];
       element._inputValue = 'c1 label';
       await nextFrame();
       element._suggestionsOpened = false;
@@ -150,7 +156,7 @@ describe('<paper-chip-input>', () => {
 
     it('Ignores values not defined in "allowed" (by id)', async () => {
       element = await allowedFixture();
-      element.source = [{value: 'c1 label', id: 'c-not-allowed'}];
+      element.source = [{ value: 'c1 label', id: 'c-not-allowed' }];
       await nextFrame();
       element._inputValue = 'c1 label';
       element._suggestionsOpened = false;
@@ -196,17 +202,17 @@ describe('<paper-chip-input>', () => {
 
     it('Enters chip label into the input field', (done) => {
       allRemoveFixture()
-      .then((el) => {
-        element = el;
-        return nextFrame();
-      })
-      .then(() => {
-        element._backspaceHandler();
-        setTimeout(() => {
-          assert.equal(element._inputValue, 'c-3');
-          done();
-        }, 10);
-      });
+          .then((el) => {
+            element = el;
+            return nextFrame();
+          })
+          .then(() => {
+            element._backspaceHandler();
+            setTimeout(() => {
+              assert.equal(element._inputValue, 'c-3');
+              done();
+            }, 10);
+          });
     });
 
     it('Handles remove event', async () => {
@@ -509,6 +515,24 @@ describe('<paper-chip-input>', () => {
     it('Returns undefined when not found in objects and no id', () => {
       const result = element._findSource([{ value: 'test', id: 'id' }], 'other');
       assert.isUndefined(result);
+    });
+  });
+
+  describe('Chip icon', () => {
+    let element;
+
+    it('has default icon on the chip', async () => {
+      element = await chipsFixture();
+      await nextFrame();
+      const node = element.shadowRoot.querySelector('paper-chip');
+      assert.equal(node.removeIcon, 'clear');
+    });
+
+    it('has the icon from attribute', async () => {
+      element = await chipsWithIconFixture();
+      await nextFrame();
+      const node = element.shadowRoot.querySelector('paper-chip');
+      assert.equal(node.removeIcon, 'add');
     });
   });
 

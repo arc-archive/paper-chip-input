@@ -247,13 +247,14 @@ export class PaperChipInput extends PaperChipInputMixin(LitElement) {
     if (!chips || !chips.length) {
       return;
     }
+    const icon = this.chipRemoveIcon || 'clear';
     return chips.map((item, index) => html`
     <paper-chip
       .removable="${this._computeChipRemovable(item)}"
       @chip-removed="${this._chipRemovedHandler}"
       @focus="${this._chipFocused}"
       tabindex="-1"
-      .remove-icon="${this.chipRemoveIcon}"
+      .removeIcon="${icon}"
       data-index="${index}">
       ${item.icon ? html `<iron-icon .icon="${item.icon}" slot="icon"></iron-icon>` : ''}
       ${item.label}
