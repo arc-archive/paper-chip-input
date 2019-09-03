@@ -13,8 +13,8 @@ the License.
 import { LitElement, html, css } from 'lit-element';
 import '@polymer/iron-a11y-keys/iron-a11y-keys.js';
 import '@polymer/paper-ripple/paper-ripple.js';
-import '@polymer/paper-item/paper-item.js';
-import '@polymer/iron-selector/iron-selector.js';
+import '@anypoint-web-components/anypoint-item/anypoint-item.js';
+import '@anypoint-web-components/anypoint-selector/anypoint-selector.js';
 import { ArcScrollTargetMixin } from '@advanced-rest-client/arc-scroll-target-mixin/arc-scroll-target-mixin.js';
 import { ArcOverlayMixin } from '@advanced-rest-client/arc-overlay-mixin/arc-overlay-mixin.js';
 /**
@@ -56,7 +56,7 @@ export class PaperChipAutocomplete extends ArcOverlayMixin(ArcScrollTargetMixin(
       overflow: auto;
     }
 
-    paper-item {
+    anypoint-item {
       position: relative;
     }`;
   }
@@ -361,17 +361,22 @@ export class PaperChipAutocomplete extends ArcOverlayMixin(ArcScrollTargetMixin(
       return undefined;
     }
     return this._suggestions.map((item, index) => html`
-    <paper-item data-index="${index}" @click="${this._itemClickHandler}" part="paper-item paper-chip-autocomplete-item">
+    <anypoint-item
+      data-index="${index}"
+      @click="${this._itemClickHandler}"
+      part="anypoint-item paper-chip-autocomplete-item">
       <span>${item.value}</span>
       <paper-ripple></paper-ripple>
-    </paper-item>`);
+    </anypoint-item>`);
   }
 
   render() {
     return html`
-    <iron-selector .selected="${this.selectedItem}" @selected-changed="${this._selectedItemChanged}" id="selector">
+    <anypoint-selector
+      .selected="${this.selectedItem}"
+      @selected-changed="${this._selectedItemChanged}" id="selector">
       ${this._suggestionsTemplate()}
-    </iron-selector>
+    </anypoint-selector>
     <iron-a11y-keys .target="${this.inputTarget}" keys="up"
       @keys-pressed="${this._selectPreviousHandler}"></iron-a11y-keys>
     <iron-a11y-keys .target="${this.inputTarget}" keys="down"

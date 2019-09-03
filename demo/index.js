@@ -162,8 +162,8 @@ class DemoPage {
         data-property="validateOut"
         label="Chips input demo"
         pattern="[a-zA-Z]+"
-        auto-validate=""
-        error-message="Only [a-zA-Z]+ allowed"
+        autovalidate=""
+        invalidmessage="Only [a-zA-Z]+ allowed"
         @value-changed="${this._inputValueChanged}"></paper-chip-input>
       ${this.renderChipValue(this.validateOut)}
 
@@ -171,8 +171,9 @@ class DemoPage {
       <paper-chip-input
         data-property="validate2Out"
         label="Chips input demo"
-        required="" auto-validate=""
-        error-message="This input is required"
+        required=""
+        autovalidate=""
+        invalidmessage="This input is required"
         @value-changed="${this._inputValueChanged}"></paper-chip-input>
       ${this.renderChipValue(this.validate2Out)}
 

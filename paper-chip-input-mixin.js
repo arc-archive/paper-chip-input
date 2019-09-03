@@ -75,11 +75,13 @@ export const PaperChipInputMixin = (superClass) => class extends superClass {
         type: String
       },
       /**
-       * Set to true to always float the label. If you're using PaperInputBehavior
-       * to implement your own paper-input-like element, bind this to the
-       * `<paper-input-container>`'s `alwaysFloatLabel` property.
+       * When set, it reduces height of the button and hides
+       * the label when the value is provided.
+       *
+       * Use it carefully as user should be able to recognize the input
+       * when the value is predefined.
        */
-      alwaysFloatLabel: {
+      noLabelFloat: {
         type: Boolean
       },
       /**
@@ -103,7 +105,7 @@ export const PaperChipInputMixin = (superClass) => class extends superClass {
        * PaperInputBehavior to implement your own paper-input-like element,
        * bind this to the `<paper-input-error>`'s content, if using.
        */
-      errorMessage: {
+      invalidMessage: {
         type: String
       },
       /**
@@ -179,10 +181,10 @@ export const PaperChipInputMixin = (superClass) => class extends superClass {
       },
       /**
        * If you're using PaperInputBehavior to implement your own paper-input-like
-       * element, bind this to the `<input is="iron-input">`'s `readonly`
+       * element, bind this to the `<input is="iron-input">`'s `readOnly`
        * property.
        */
-      readonly: {
+      readOnly: {
         type: Boolean
       },
       /**
@@ -357,17 +359,17 @@ export const PaperChipInputMixin = (superClass) => class extends superClass {
     }
   }
 
-  get readonly() {
-    return this._readonly;
+  get readOnly() {
+    return this._readOnly;
   }
 
-  set readonly(value) {
-    const oldValue = this._readonly;
+  set readOnly(value) {
+    const oldValue = this._readOnly;
     if (oldValue === value) {
       return;
     }
-    this._readonly = value;
-    this.requestUpdate('readonly', oldValue);
+    this._readOnly = value;
+    this.requestUpdate('readOnly', oldValue);
     if (value) {
       this.setAttribute('aria-readonly', 'true');
     } else {

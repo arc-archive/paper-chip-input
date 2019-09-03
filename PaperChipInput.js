@@ -17,7 +17,7 @@ the License.
 */
 
 import { LitElement, html, css } from 'lit-element';
-import '@polymer/paper-input/paper-input.js';
+import '@anypoint-web-components/anypoint-input/anypoint-input.js';
 import '@advanced-rest-client/paper-chip/paper-chip.js';
 import '@polymer/iron-a11y-keys/iron-a11y-keys.js';
 import '@polymer/iron-icon/iron-icon.js';
@@ -69,10 +69,6 @@ export class PaperChipInput extends PaperChipInputMixin(LitElement) {
     :host {
       display: block;
       position: relative;
-
-      --paper-input-container-input: {
-        min-width: 170px;
-      };
     }
 
     .chips {
@@ -80,6 +76,11 @@ export class PaperChipInput extends PaperChipInputMixin(LitElement) {
       flex-direction: row;
       align-items: center;
       flex-wrap: wrap;
+    }
+
+    anypoint-input {
+      width: auto;
+      min-width: 170px;
     }`;
   }
 
@@ -109,15 +110,17 @@ export class PaperChipInput extends PaperChipInputMixin(LitElement) {
 
   constructor() {
     super();
-    this._inputValueChanged = this._inputValueChanged.bind(this);
-    this._inputInvalidChanged = this._inputInvalidChanged.bind(this);
-    this._inputBlur = this._inputBlur.bind(this);
-    this._chipRemovedHandler = this._chipRemovedHandler.bind(this);
-    this._chipFocused = this._chipFocused.bind(this);
-    this._suggestionsOpenedChanged = this._suggestionsOpenedChanged.bind(this);
-    this._suggestionSelected = this._suggestionSelected.bind(this);
     this._enterHandler = this._enterHandler.bind(this);
     this._backspaceHandler = this._backspaceHandler.bind(this);
+  }
+
+  connectedCallback() {
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'textbox');
+    }
   }
 
   firstUpdated() {
@@ -126,17 +129,17 @@ export class PaperChipInput extends PaperChipInputMixin(LitElement) {
     if (!this._inputElement.hasAttribute('tabindex')) {
       this._inputElement.setAttribute('tabindex', 0);
     }
-    if (!this.hasAttribute('role')) {
-      this.setAttribute('role', 'textbox');
-    }
-    this._positionTarget = this._inputElement.inputElement;
+    // input element at this point is not yet initialized
+    setTimeout(() => {
+      this._positionTarget = this._inputElement.inputElement;
+    });
   }
   /**
    * Listens for Enter key click and accepts the chip value if it can
    * be accepted.
    */
   _enterHandler() {
-    if (this._suggestionsOpened || !this.shadowRoot.querySelector('paper-input').validate()) {
+    if (this._suggestionsOpened || !this.shadowRoot.querySelector('anypoint-input').validate()) {
       return;
     }
     const value = this._inputValue;
@@ -204,9 +207,7 @@ export class PaperChipInput extends PaperChipInputMixin(LitElement) {
     });
   }
   /**
-   * Chips are focusable elements and they work really
-   * bed with paper-input as an addon.
-   * This cancels the event so paper-input won't become focused.
+   * This cancels the event so anypoint-input won't become focused.
    *
    * @param {ClickEvent} e
    */
@@ -222,7 +223,7 @@ export class PaperChipInput extends PaperChipInputMixin(LitElement) {
       this._enterHandler();
     }
     // Chip looses it's focus right after getting it as input stills the focus.
-    // const chips = this.shadowRoot.querySelectorAll('paper-chip');
+    // const chips = this.shadowRoot.querySelectorAll('anypoint-chip');
     // for (let i = 0, len = chips.length; i < len; i++) {
     //   if (chips[i].focused) {
     //     chips[i]._focusBlurHandler({});
@@ -243,7 +244,7 @@ export class PaperChipInput extends PaperChipInputMixin(LitElement) {
   }
 
   _renderChipsTemplate() {
-    const chips = this.chips;
+    const { chips } = this;
     if (!chips || !chips.length) {
       return;
     }
@@ -263,46 +264,43 @@ export class PaperChipInput extends PaperChipInputMixin(LitElement) {
   }
 
   render() {
-    return html`<paper-input
+    return html`<anypoint-input
       class="input-input"
-      .always-float-label="${this.alwaysFloatLabel}"
-      .no-label-float="${!this.alwaysFloatLabel}"
-      .auto-validate="${this.autoValidate}"
-      .disabled="${this.disabled}"
-      .readonly="${this.readonly}"
+      ?noLabelFloat="${this.noLabelFloat}"
+      ?autovalidate="${this.autoValidate}"
+      ?disabled="${this.disabled}"
+      ?readonly="${this.readOnly}"
       .value="${this._inputValue}"
       @value-changed="${this._inputValueChanged}"
-      .label="${this.label}"
-      .allowed-pattern="${this.allowedPattern}"
+      .allowedPattern="${this.allowedPattern}"
       .pattern="${this.pattern}"
-      .char-counter="${this.charCounter}"
       .invalid="${this.invalid}"
       @invalid-changed="${this._inputInvalidChanged}"
-      .error-message="${this.errorMessage}"
+      .invalidmessage="${this.invalidMessage}"
       .validator="${this.validator}"
       .autofocus="${this.autofocus}"
-      .inputmode="${this.inputmode}"
-      .minlength="${this.minlength}"
-      .maxlength="${this.maxlength}"
+      .inputMode="${this.inputmode}"
+      .minLength="${this.minlength}"
+      .maxLength="${this.maxlength}"
       .name="${this.name}"
       .placeholder="${this.placeholder}"
       .autocapitalize="${this.autocapitalize}"
       .autocorrect="${this.autocorrect}"
-      .autosave="${this.autosave}"
       @blur="${this._inputBlur}">
+      <label slot="label">${this.label}</label>
       <div class="chips" slot="prefix">
         ${this._renderChipsTemplate()}
       </div>
-    </paper-input>
+    </anypoint-input>
     <paper-chip-autocomplete
       .source="${this.source}"
       .value="${this._inputValue}"
       .positionTarget="${this._positionTarget}"
       .inputTarget="${this._inputElement}"
-      dynamic-align=""
-      vertical-align="top"
-      vertical-offset="36"
-      horizontal-align="left"
+      dynamicalign=""
+      verticalalign="top"
+      verticaloffset="36"
+      horizontalalign="left"
       @selected="${this._suggestionSelected}"
       .opened="${this._suggestionsOpened}"
       @opened-changed="${this._suggestionsOpenedChanged}"></paper-chip-autocomplete>

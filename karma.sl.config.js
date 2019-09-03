@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const merge = require('webpack-merge');
+const merge = require('deepmerge');
 const slSettings = require('@advanced-rest-client/testing-karma-sl/sl-settings.js');
 const createBaseConfig = require('./karma.conf.js');
 
 module.exports = (config) => {
-  const cnf = slSettings(config);
+  const cnf = slSettings();
   cnf.sauceLabs.testName = 'paper-chip-input';
   cnf.browsers = [
     'SL_Chrome',
@@ -12,7 +12,6 @@ module.exports = (config) => {
     'SL_Firefox',
     'SL_Firefox-1',
     'SL_Safari',
-    'SL_Safari-1',
     'SL_EDGE'
   ];
   if (process.env.TRAVIS) {
@@ -27,9 +26,7 @@ module.exports = (config) => {
     cnf.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_NUMBER;
   }
 
-  config.set(
-    merge(createBaseConfig(config), cnf)
-  );
+  config.set(merge(createBaseConfig(config), cnf));
 
   return config;
 };
