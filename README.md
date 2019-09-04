@@ -8,6 +8,8 @@
 
 A material design input with chips
 
+**This project is deprecated.** Please, use [anypoint-chip-input](https://github.com/anypoint-web-components/anypoint-chip-input) instead.
+
 ```html
 <p>Regular input</p>
 <paper-chip-input label="Input with chips" value='["Alarm"]' source='[{"value": "Alarm", "icon": "alarm"}]'></paper-chip-input>
